@@ -1,6 +1,7 @@
 package com.yerti.core.inventories;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
@@ -24,7 +25,7 @@ public class CustomInventory implements InventoryHolder {
 
     public void createBackground() {
         for (int i = 0; i < slots; i++) {
-            if (inventory.getContents()[i] == null) {
+            if (inventory.getContents()[i] == null || inventory.getContents()[i].getType().equals(Material.AIR)) {
                 inventory.setItem(i, backgroundItem);
             }
         }
