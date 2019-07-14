@@ -15,12 +15,12 @@ public class CustomInventory implements InventoryHolder {
 
 
 
-    public CustomInventory(int slots, String displayName, ItemStack backgroundItem) {
+    public CustomInventory(InventoryHolder holder, int slots, String displayName, ItemStack backgroundItem) {
         this.slots = slots;
         this.displayName = displayName;
         this.backgroundItem = backgroundItem;
 
-        inventory = Bukkit.createInventory(this, slots, displayName);
+        inventory = Bukkit.createInventory(holder, slots, displayName);
     }
 
     public void createBackground() {
