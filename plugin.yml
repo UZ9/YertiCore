@@ -1,0 +1,5 @@
+name: YertiCore
+version: 1.0
+description: Core for almost all of my plugins
+author: Yerti
+main: com.yerti.yerticore
