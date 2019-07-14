@@ -27,11 +27,15 @@ public class CustomItemStack extends ItemStack {
 
 
         if (glowing) {
-            this.addUnsafeEnchantment(Enchantment.DIG_SPEED, 1);
+
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
 
         this.setItemMeta(meta);
+
+        if (glowing) {
+            this.addUnsafeEnchantment(Enchantment.DIG_SPEED, 1);
+        }
     }
 
 
