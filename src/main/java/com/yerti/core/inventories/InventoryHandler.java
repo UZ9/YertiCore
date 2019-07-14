@@ -9,8 +9,7 @@ public class InventoryHandler implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        System.out.println("eee");
-        if (event.getInventory().getHolder() instanceof IInventory) {
+        if (event.getInventory().getHolder() instanceof CustomInventory) {
             //Inventory is one of ours
             event.setCancelled(true);
             IInventory inventory = (IInventory) event.getInventory().getHolder();

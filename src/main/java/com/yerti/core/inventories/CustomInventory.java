@@ -3,9 +3,10 @@ package com.yerti.core.inventories;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 
-public class CustomInventory {
+public class CustomInventory implements InventoryHolder {
 
     Inventory inventory;
     private int slots;
@@ -19,7 +20,7 @@ public class CustomInventory {
         this.displayName = displayName;
         this.backgroundItem = backgroundItem;
 
-        inventory = Bukkit.createInventory(null, slots, displayName);
+        inventory = Bukkit.createInventory(this, slots, displayName);
     }
 
     public void createBackground() {
