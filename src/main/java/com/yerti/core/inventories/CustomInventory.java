@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 public class CustomInventory implements InventoryHolder {
 
     Inventory inventory;
+    InventoryHolder holder;
     private int slots;
     private String displayName;
     private ItemStack backgroundItem;
@@ -19,6 +20,7 @@ public class CustomInventory implements InventoryHolder {
         this.slots = slots;
         this.displayName = displayName;
         this.backgroundItem = backgroundItem;
+        this.holder = holder;
 
         inventory = Bukkit.createInventory(holder, slots, displayName);
     }
