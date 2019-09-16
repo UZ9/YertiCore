@@ -52,12 +52,8 @@ public class CustomEntityUtilities {
      * @param armor
      */
     public static void setArmor(LivingEntity e, ItemStack[] armor) {
-
-        for (int i = 0; i < 4; i++) {
-            EntityEquipment entityEquipment = e.getEquipment();
-            entityEquipment.setArmorContents(armor);
-        }
-
+        EntityEquipment entityEquipment = e.getEquipment();
+        entityEquipment.setArmorContents(armor);
     }
 
     /**

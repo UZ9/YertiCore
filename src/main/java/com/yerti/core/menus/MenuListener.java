@@ -31,7 +31,7 @@ public class MenuListener implements Listener {
      * @param event
      */
     @EventHandler
-    //TODO: Change to contains inventory ratehr than name
+    //TODO: Change to contains inventory rather than name
     public void onPlayerClick(InventoryClickEvent event) {
         if (event.getInventory() == null) return;
         if (!inventories.contains(event.getInventory().getName())) return;
