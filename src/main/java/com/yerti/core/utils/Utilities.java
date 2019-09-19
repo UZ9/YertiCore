@@ -5,8 +5,11 @@ import org.bukkit.inventory.ItemStack;
 
 public class Utilities {
 
-    /**
+     /**
      * Checks if the player can fit the ItemStack within their inventory.
+     * @param player
+     * @param itemStack
+     * @return
      */
     public static boolean hasInventorySpace(Player player, ItemStack itemStack) {
 
@@ -30,6 +33,12 @@ public class Utilities {
         return false;
     }
 
+    /**
+     * Checks if the player have an amount of slots open
+     * @param player
+     * @param slots
+     * @return
+     */
     public static boolean hasOpenSlots(Player player, int slots) {
 
         int freeSlots = 0;
