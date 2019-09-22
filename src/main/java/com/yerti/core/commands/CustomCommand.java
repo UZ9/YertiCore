@@ -11,11 +11,15 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 /**
+ * NOTE: THIS IS NOW DEPRECATED
+ * Command handling has been moved to annotations.
+ *
  * Custom abstract command handler
  * To use, extend CustomCommand and implement the methods needed
  * in OnEnable, create the CustomCommand by doing new CustomCommad(parameters).initCommand(),
  * where parameters are any needed parameters you need.
  */
+@Deprecated
 public abstract class CustomCommand implements CommandExecutor {
 
     protected static CommandMap commandMap;
