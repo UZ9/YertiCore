@@ -22,14 +22,14 @@ import java.util.List;
 @Deprecated
 public abstract class CustomCommand implements CommandExecutor {
 
-    protected static CommandMap commandMap;
+    private static CommandMap commandMap;
 
-    String command;
-    protected String usage;
-    String description;
-    String noPermMessage;
-    List<String> aliases;
-    String permission;
+    private String command;
+    private String usage;
+    private String description;
+    private String noPermMessage;
+    private List<String> aliases;
+    private String permission;
 
     public CustomCommand(String command, String permission) {
         this(command, null, null, null, permission, null);
