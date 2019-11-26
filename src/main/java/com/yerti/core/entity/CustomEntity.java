@@ -1,9 +1,9 @@
 package com.yerti.core.entity;
 
-import com.sun.istack.internal.Nullable;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
+import org.jetbrains.annotations.Nullable;
 
 
 /**

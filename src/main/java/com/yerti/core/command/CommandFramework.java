@@ -1,4 +1,4 @@
-package com.yerti.core.prototype.command;
+package com.yerti.core.command;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -58,7 +58,7 @@ public class CommandFramework implements CommandExecutor {
             Class<?>[] parameterType = method.getParameterTypes();
 
             if (parameterType.length > 3)
-                if (parameterType[0] != CommandSender.class || parameterType[1] != org.bukkit.command.Command.class || parameterType[2] != String[].class) {
+                if (parameterType[0] != CommandSender.class || parameterType[1] != Command.class || parameterType[2] != String[].class) {
                     Bukkit.getLogger().log(Level.SEVERE, "Unable to register command " + method.getName() + ".");
                 }
             final CustomCommand command = method.getAnnotation(CustomCommand.class);
@@ -86,25 +86,25 @@ public class CommandFramework implements CommandExecutor {
                 if (parameterType[0] != CommandSender.class || parameterType[1] != Command.class || parameterType[2] != String[].class) {
                     Bukkit.getLogger().log(Level.SEVERE, "Unable to register subcommand " + method.getName() + ".");
                 }
-            SubCommand subCommand = method.getAnnotation(SubCommand.class);
-            BukkitCommand parent = commandMap.get(subCommand.parent());
-            if (parent == null) {
+                SubCommand subCommand = method.getAnnotation(SubCommand.class);
+                BukkitCommand parent = commandMap.get(subCommand.parent());
+                if (parent == null) {
 
-                Bukkit.getLogger().log(Level.SEVERE, "Unable to register subcommand " + method.getName() + " because the parent " + subCommand.parent() + " was null.");
-                continue;
-            }
+                    Bukkit.getLogger().log(Level.SEVERE, "Unable to register subcommand " + method.getName() + " because the parent " + subCommand.parent() + " was null.");
+                    continue;
+                }
 
-            BukkitCommand command = new BukkitCommand(
-                    subCommand.name(),
-                    subCommand.permission(),
-                    subCommand.usage(),
-                    subCommand.description(),
-                    new String[0],
-                    method,
-                    object
-            );
+                BukkitCommand command = new BukkitCommand(
+                  subCommand.name(),
+                  subCommand.permission(),
+                  subCommand.usage(),
+                  subCommand.description(),
+                  new String[0],
+                  method,
+                  object
+                );
 
-            parent.addSubCommand(command);
+                parent.addSubCommand(command);
 
 
         }

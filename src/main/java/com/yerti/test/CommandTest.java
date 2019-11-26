@@ -1,13 +1,13 @@
 package com.yerti.test;
 
-import com.yerti.core.prototype.YertiPlugin;
-import com.yerti.core.prototype.command.CustomCommand;
+import com.yerti.core.YertiPlugin;
+import com.yerti.core.command.CustomCommand;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 /**
- * Example of a command using the YertiCore {@link com.yerti.core.prototype.command.CustomCommand} annotations
+ * Example of a command using the YertiCore {@link com.yerti.core.command.CustomCommand} annotations
  */
 public class CommandTest extends YertiPlugin {
 
@@ -21,7 +21,7 @@ public class CommandTest extends YertiPlugin {
     }
 
     /**
-     * Toggles the flying of a player using {@link com.yerti.core.prototype.command.CustomCommand} annotations
+     * Toggles the flying of a player using {@link com.yerti.core.command.CustomCommand} annotations
      * Command Annotation Parameters:
      * String name, String permission, String description, String usage, String[] aliases
      * SubCommand can be used the same way

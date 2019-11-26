@@ -1,4 +1,4 @@
-package com.yerti.core.prototype.command;
+package com.yerti.core.command;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -9,11 +9,11 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 /**
  * Java Annotation for commands
- * CustomCommand Annotation Parameters:
+ * Custom Command Annotation Parameters:
  * String name, String permission, String description, String usage, String[] aliases
  * SubCommand can be used the same way
  * @param sender CommandSender
- * @param command CustomCommand issued
+ * @param command Custom Command issued
  * @param args Arguments from command
  */
 public @interface CustomCommand {
