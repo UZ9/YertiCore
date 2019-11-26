@@ -1,12 +1,13 @@
 package com.yerti.test;
 
 import com.yerti.core.prototype.YertiPlugin;
-import com.yerti.core.prototype.command.Command;
+import com.yerti.core.prototype.command.CustomCommand;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 /**
- * Example of a command using the YertiCore {@link com.yerti.core.prototype.command.Command} annotations
+ * Example of a command using the YertiCore {@link com.yerti.core.prototype.command.CustomCommand} annotations
  */
 public class CommandTest extends YertiPlugin {
 
@@ -15,11 +16,12 @@ public class CommandTest extends YertiPlugin {
      */
     @Override
     public void onEnable() {
-        load();
+
+        load(CommandTest.class);
     }
 
     /**
-     * Toggles the flying of a player using {@link com.yerti.core.prototype.command.Command} annotations
+     * Toggles the flying of a player using {@link com.yerti.core.prototype.command.CustomCommand} annotations
      * Command Annotation Parameters:
      * String name, String permission, String description, String usage, String[] aliases
      * SubCommand can be used the same way
@@ -27,8 +29,8 @@ public class CommandTest extends YertiPlugin {
      * @param command Command issued
      * @param args Arguments from command
      */
-    @Command(name = "fly", permission = "admin.fly", description = "Let's you fly!", usage = "/fly", aliases = "")
-    public void set(CommandSender sender,  Command command, String[] args) {
+    @CustomCommand(name = "fly", permission = "admin.fly", description = "Let's you fly!", usage = "/fly", aliases = "")
+    public void set(CommandSender sender, Command command, String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (player.isFlying()) {

@@ -1,5 +1,6 @@
 package com.yerti.core.prototype.command;
 
+import com.yerti.runecraft.RuneCraft;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -19,29 +20,51 @@ public class CommandFramework implements CommandExecutor {
     private final Plugin plugin;
     private Map<BukkitCommand, Object> commands = new HashMap<>();
     private CommandMap map;
+    private Class commandClass;
 
-    public CommandFramework(Plugin plugin) {
+    public CommandFramework(Plugin plugin, Class commandClass) {
         this.plugin = plugin;
         map = getCommandMap();
+        this.commandClass = commandClass;
+
+        registerCommands();
+
+
+
+
+
     }
 
-    public void register(Object object) {
-        final Class<?> clazz = object.getClass();
-
+    public void registerCommands() {
         final Map<String, BukkitCommand> commandMap = new HashMap<>();
 
-        for (Method method : clazz.getMethods()) {
-            if (!method.isAnnotationPresent(com.yerti.core.prototype.command.Command.class)) {
+        //for (Method method : clazz.getMethods()) {
+        for (Method method  : commandClass.getMethods()) {
+            Object object = null;
+            String name = commandClass.getName();
+            try {
+                Class<?> clazz = Class.forName(name);
+                object = clazz.newInstance();
+
+
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+                e.printStackTrace();
+            }
+
+            System.out.println("Found class " + object.getClass().getName());
+
+            if (!method.isAnnotationPresent(CustomCommand.class)) {
                 continue;
             }
+
 
             Class<?>[] parameterType = method.getParameterTypes();
 
             if (parameterType.length > 3)
-                if (parameterType[0] != CommandSender.class || parameterType[1] != org.bukkit.command.Command.class || parameterType[2] != String[].class) {
+                if (parameterType[0] != CommandSender.class || parameterType[1] != Command.class || parameterType[2] != String[].class) {
                     Bukkit.getLogger().log(Level.SEVERE, "Unable to register command " + method.getName() + ".");
                 }
-            final com.yerti.core.prototype.command.Command command = method.getAnnotation(com.yerti.core.prototype.command.Command.class);
+            final CustomCommand command = method.getAnnotation(CustomCommand.class);
 
             final BukkitCommand customCommand = new BukkitCommand(command.name(), command.permission(), command.usage(), command.description(), command.aliases(), method, object);
 
@@ -53,7 +76,9 @@ public class CommandFramework implements CommandExecutor {
 
         }
 
-        for (Method method : clazz.getClass().getMethods()) {
+        for (Method method : commandClass.getMethods()) {
+            Object object = method.getClass();
+
             if (!method.isAnnotationPresent(SubCommand.class)) {
                 continue;
             }
@@ -61,7 +86,7 @@ public class CommandFramework implements CommandExecutor {
             Class<?>[] parameterType = method.getParameterTypes();
 
             if (parameterType.length > 3)
-                if (parameterType[0] != CommandSender.class || parameterType[1] != org.bukkit.command.Command.class || parameterType[2] != String[].class) {
+                if (parameterType[0] != CommandSender.class || parameterType[1] != Command.class || parameterType[2] != String[].class) {
                     Bukkit.getLogger().log(Level.SEVERE, "Unable to register subcommand " + method.getName() + "."); }
                 SubCommand subCommand = method.getAnnotation(SubCommand.class);
                 BukkitCommand parent = commandMap.get(subCommand.parent());
@@ -89,22 +114,27 @@ public class CommandFramework implements CommandExecutor {
             if (bukkitCommand.getName().equalsIgnoreCase(cmd.getName())) {
                 Method method = bukkitCommand.getMethod();
                 Object object = commands.get(bukkitCommand);
-                com.yerti.core.prototype.command.Command command = method.getAnnotation(com.yerti.core.prototype.command.Command.class);
-
-                if (!command.permission().isEmpty() && !commandSender.hasPermission(command.permission())) {
+                CustomCommand customCommand = method.getAnnotation(CustomCommand.class);
+                if (!customCommand.permission().isEmpty() && !commandSender.hasPermission(customCommand.permission())) {
                     //TODO: DI Error message from subclass
                     commandSender.sendMessage("You don't have permission for that!");
                     return true;
                 }
 
                 //TODO: Only Player
-                //if (!command.)
+                //if (!customCommand.)
 
 
                 try {
                     method.invoke(object, commandSender,  cmd, strings);
                 } catch (IllegalAccessException | InvocationTargetException e) {
-                    e.printStackTrace();
+                    if (RuneCraft.getInstance().debugMode()) {
+                        System.out.println("Caught invoke exception.");
+                        e.printStackTrace();
+                    } else {
+                        System.out.println("Caught invoke exception.");
+                    }
+
                 }
             }
 

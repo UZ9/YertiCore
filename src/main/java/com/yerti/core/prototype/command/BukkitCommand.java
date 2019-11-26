@@ -51,24 +51,47 @@ public class BukkitCommand {
         return permission;
     }
 
+    public void setPermission(String permission) {
+        this.permission = permission;
+    }
+
     public String getUsage() {
         return usage;
+    }
+
+    public void setUsage(String usage) {
+        this.usage = usage;
     }
 
     public String getDescription() {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String[] getAliases() {
         return aliases;
+    }
+
+    public void setAliases(String[] aliases) {
+        this.aliases = aliases;
     }
 
     public Method getMethod() {
         return method;
     }
 
+    public void setMethod(Method method) {
+        this.method = method;
+    }
+
     public Object getExecutor() {
         return executor;
     }
 
+    public void setExecutor(Object executor) {
+        this.executor = executor;
+    }
 }

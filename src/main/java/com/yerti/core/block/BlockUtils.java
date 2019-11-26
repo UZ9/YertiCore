@@ -9,7 +9,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * Various utilities for {@link org.bukkit.block.Block}
+ * Various utilities for {@link Block}
  */
 public class BlockUtils {
 

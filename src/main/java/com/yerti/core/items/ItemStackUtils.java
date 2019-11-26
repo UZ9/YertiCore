@@ -4,13 +4,13 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * Contains several {@link org.bukkit.inventory.ItemStack} utilities for ease
+ * Contains several {@link ItemStack} utilities for ease
  */
 public class ItemStackUtils {
 
 
     /**
-     * @return the smelted {@link org.bukkit.inventory.ItemStack} variant of the {@param itemStack}
+     * @return the smelted {@link ItemStack} variant of the {@param itemStack}
      */
     public static ItemStack getSmeltedItemStack(final ItemStack itemStack) {
         switch (itemStack.getType()) {

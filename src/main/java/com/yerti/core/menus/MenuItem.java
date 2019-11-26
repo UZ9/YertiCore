@@ -18,7 +18,7 @@ public class MenuItem extends ItemStack {
 
     /**
      * Creates a MenuItem off of a material, amount, and an action for the inventory click event.
-     * @param stack {@link org.bukkit.inventory.ItemStack} the ItemStack to be used
+     * @param stack {@link ItemStack} the ItemStack to be used
      * @param event the action for when inventory click occurs
      */
     public MenuItem(ItemStack stack, Consumer<InventoryClickEvent> event) {

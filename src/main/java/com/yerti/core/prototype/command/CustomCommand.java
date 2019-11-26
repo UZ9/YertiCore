@@ -9,14 +9,14 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 /**
  * Java Annotation for commands
- * Command Annotation Parameters:
+ * CustomCommand Annotation Parameters:
  * String name, String permission, String description, String usage, String[] aliases
  * SubCommand can be used the same way
  * @param sender CommandSender
- * @param command Command issued
+ * @param command CustomCommand issued
  * @param args Arguments from command
  */
-public @interface Command {
+public @interface CustomCommand {
 
     /**
      * REQUIRED

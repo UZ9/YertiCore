@@ -17,7 +17,7 @@ public class MenuListener implements Listener {
     List<String> inventories;
 
     /**
-     * Creates a MenuListener off of a list of {@link com.yerti.core.menus.Page}s
+     * Creates a MenuListener off of a list of {@link Page}s
      * @param menus
      */
     public MenuListener(List<Page> menus) {
@@ -27,7 +27,7 @@ public class MenuListener implements Listener {
     }
 
     /**
-     * Checks for any specific {@link com.yerti.core.menus.MenuItem}s and their designated events
+     * Checks for any specific {@link MenuItem}s and their designated events
      * @param event
      */
     @EventHandler
