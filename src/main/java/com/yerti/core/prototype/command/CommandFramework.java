@@ -1,6 +1,5 @@
 package com.yerti.core.prototype.command;
 
-import com.yerti.runecraft.RuneCraft;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -50,8 +49,6 @@ public class CommandFramework implements CommandExecutor {
             } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
                 e.printStackTrace();
             }
-
-            System.out.println("Found class " + object.getClass().getName());
 
             if (!method.isAnnotationPresent(CustomCommand.class)) {
                 continue;
@@ -128,12 +125,7 @@ public class CommandFramework implements CommandExecutor {
                 try {
                     method.invoke(object, commandSender,  cmd, strings);
                 } catch (IllegalAccessException | InvocationTargetException e) {
-                    if (RuneCraft.getInstance().debugMode()) {
-                        System.out.println("Caught invoke exception.");
-                        e.printStackTrace();
-                    } else {
-                        System.out.println("Caught invoke exception.");
-                    }
+                    e.printStackTrace();
 
                 }
             }
