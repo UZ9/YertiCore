@@ -1,0 +1,3 @@
+main: com.yerti.core.YertiPlugin
+name: YertiCore
+version: 1.0
