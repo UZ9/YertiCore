@@ -13,21 +13,36 @@ public class CustomRecipe {
     private Map<Character, ItemStack> matrixKey = new HashMap<>();
     private static Map<ItemStack, ItemStack[]> matrixMap = new HashMap<>();
 
-
-
+    /**
+     * Creates a new custom recipe
+     * @param output the output of the recipe
+     */
     public CustomRecipe(ItemStack output) {
         recipe = new ShapedRecipe(output);
     }
 
+    /**
+     * Sets the shape of the recipe
+     * @param shape
+     */
     public void shape(String... shape) {
         recipe.shape(shape);
     }
 
+    /**
+     * Sets one of the ingredients of the recipe using a key-value setup
+     * @param key
+     * @param ingredient
+     */
     public void setIngredient(char key, ItemStack ingredient) {
         recipe.setIngredient(key, ingredient.getType());
         matrixKey.put(key, ingredient);
     }
 
+    /**
+     * Builds a {@link ShapedRecipe} that can be used in the Bukkit createRecipe method
+     * @return
+     */
     public ShapedRecipe build() {
         ItemStack[] matrix = new ItemStack[9];
 
@@ -48,7 +63,11 @@ public class CustomRecipe {
 
     }
 
-    public static Map<ItemStack, ItemStack[]> getMatrixMap() {
+    /**
+     * Retrieves the matrix map of the custom recipes
+     * @return
+     */
+    static Map<ItemStack, ItemStack[]> getMatrixMap() {
         return matrixMap;
     }
 }

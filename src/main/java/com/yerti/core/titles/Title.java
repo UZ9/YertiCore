@@ -287,15 +287,14 @@ public class Title {
                         new Class[] { Title.packetActions, chatBaseComponent,
                                 Integer.TYPE, Integer.TYPE, Integer.TYPE })
                         .newInstance(
-                                new Object[] {
-                                        actions[2],
-                                        null,
-                                        Integer.valueOf(this.fadeInTime
-                                                * (this.ticks ? 1 : 20)),
-                                        Integer.valueOf(this.stayTime
-                                                * (this.ticks ? 1 : 20)),
-                                        Integer.valueOf(this.fadeOutTime
-                                                * (this.ticks ? 1 : 20)) });
+                                actions[2],
+                                null,
+                                this.fadeInTime
+                                        * (this.ticks ? 1 : 20),
+                                this.stayTime
+                                        * (this.ticks ? 1 : 20),
+                                this.fadeOutTime
+                                        * (this.ticks ? 1 : 20));
                 if ((this.fadeInTime != -1) && (this.fadeOutTime != -1)
                         && (this.stayTime != -1)) {
                     sendPacket.invoke(connection, packet);
@@ -336,6 +335,7 @@ public class Title {
         if (Title.packetTitle != null) {
             try {
                 Object handle = getHandle(player);
+                assert handle != null;
                 Object connection = getField(handle.getClass(),
                         "playerConnection").get(handle);
                 Object[] actions = Title.packetActions.getEnumConstants();
@@ -350,7 +350,7 @@ public class Title {
                         .getConstructor(
                                 new Class[] { Title.packetActions,
                                         chatBaseComponent }).newInstance(
-                                new Object[] { actions[1], serialized });
+                                actions[1], serialized);
                 sendPacket.invoke(connection, packet);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -412,8 +412,8 @@ public class Title {
     }
 
     private Class<?> getPrimitiveType(Class<?> clazz) {
-        return CORRESPONDING_TYPES.containsKey(clazz) ? CORRESPONDING_TYPES
-                .get(clazz) : clazz;
+        return CORRESPONDING_TYPES
+                .getOrDefault(clazz, clazz);
     }
 
     private Class<?>[] toPrimitiveTypeArray(Class<?>[] classes) {
@@ -458,6 +458,7 @@ public class Title {
         String version = name.substring(name.lastIndexOf('.') + 1) + ".";
         return version;
     }
+
 
     private Class<?> getNMSClass(String className) {
         String fullName = "net.minecraft.server." + getVersion() + className;

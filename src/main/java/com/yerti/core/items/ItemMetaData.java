@@ -9,10 +9,27 @@ import java.util.List;
 
 public class ItemMetaData {
 
+    //TODO: Replace with NMSUtils
+
+    /**
+     * Sets the metdata information of an itemstack with a value
+     * @param item
+     * @param metadata
+     * @param value
+     * @return
+     */
     public static org.bukkit.inventory.ItemStack setMetadata(org.bukkit.inventory.ItemStack item, String metadata, Object value){
         return CraftItemStack.asBukkitCopy(setMetadata(CraftItemStack.asNMSCopy(item), metadata, value));
     }
 
+
+    /**
+     * Sets the metadata of an itemstack with a value
+     * @param item
+     * @param metadata
+     * @param value
+     * @return
+     */
     public static ItemStack setMetadata(ItemStack item, String metadata, Object value){
         if(item.getTag() == null){
             item.setTag(new NBTTagCompound());
@@ -21,18 +38,42 @@ public class ItemMetaData {
         return item;
     }
 
+    /**
+     * Checks if an object has a specific key of metadata
+     * @param item
+     * @param metadata
+     * @return
+     */
     public static boolean hasMetadata(org.bukkit.inventory.ItemStack item, String metadata){
         return hasMetadata(CraftItemStack.asNMSCopy(item), metadata);
     }
 
+    /**
+     * Checks if an object has a specific key of metadata
+     * @param item
+     * @param metadata
+     * @return
+     */
     public static boolean hasMetadata(ItemStack item, String metadata){
-        return item.getTag() == null ? false : item.getTag().hasKey(metadata);
+        return item.getTag() != null && item.getTag().hasKey(metadata);
     }
 
+    /**
+     * Retrieves the metadata of a key from an item
+     * @param item
+     * @param metadata
+     * @return
+     */
     public static Object getMetadata(org.bukkit.inventory.ItemStack item, String metadata){
         return getMetadata(CraftItemStack.asNMSCopy(item), metadata);
     }
 
+    /**
+     * Retrieves the metadata of a key from an item
+     * @param item
+     * @param metadata
+     * @return
+     */
     public static Object getMetadata(ItemStack item, String metadata){
         if(!hasMetadata(item, metadata))return null;
         return getObject(item.getTag().get(metadata));
@@ -68,6 +109,9 @@ public class ItemMetaData {
     }
 
     @SuppressWarnings("unchecked")
+    /**
+     * Retrieves an object off ofo an NBTTag (Still in development, may not be used)
+     */
     private static Object getObject(NBTBase tag){
         if(tag instanceof NBTTagEnd){
             return null;

@@ -11,6 +11,10 @@ import org.bukkit.event.inventory.InventoryClickEvent;
  */
 public class InventoryHandler implements Listener {
 
+    /**
+     * Handles the CustomInventory onClick events
+     * @param event
+     */
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         if (event.getInventory().getHolder() instanceof IInventory) {

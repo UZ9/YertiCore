@@ -33,6 +33,12 @@ public class BlockUtils {
 
     }
 
+    /**
+     * Retireves all of the blocks in x radius around l location
+     * @param l
+     * @param radius
+     * @return
+     */
     public static List<Location> getBlocks(Location l, int radius)
     {
         World w = l.getWorld();

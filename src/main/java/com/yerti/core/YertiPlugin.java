@@ -30,10 +30,6 @@ public class YertiPlugin extends JavaPlugin {
 
     }
 
-    protected void load() {
-        getServer().getPluginManager().registerEvents(new ModelProtection(), this);
-    }
-
     public static Plugin getHookedPlugin() {
         return hookedPlugin;
     }

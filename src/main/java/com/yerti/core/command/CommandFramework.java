@@ -19,73 +19,76 @@ public class CommandFramework implements CommandExecutor {
     private final Plugin plugin;
     private Map<BukkitCommand, Object> commands = new HashMap<>();
     private CommandMap map;
-    private Class commandClass;
+    private Class[] commandClasses;
 
-    public CommandFramework(Plugin plugin, Class commandClass) {
+    /**
+     * Creates a new framework with classses that have command annotations
+     * @param plugin
+     * @param commandClasses
+     */
+    public CommandFramework(Plugin plugin, Class... commandClasses) {
         this.plugin = plugin;
         map = getCommandMap();
-        this.commandClass = commandClass;
+        this.commandClasses = commandClasses;
 
         registerCommands();
-
-
-
-
-
     }
 
-    public void registerCommands() {
-        final Map<String, BukkitCommand> commandMap = new HashMap<>();
+    private void registerCommands() {
 
-        //for (Method method : clazz.getMethods()) {
-        for (Method method  : commandClass.getMethods()) {
-            Object object = null;
-            String name = commandClass.getName();
-            try {
-                Class<?> clazz = Class.forName(name);
-                object = clazz.newInstance();
+        for (Class commandClass : commandClasses) {
 
+            final Map<String, BukkitCommand> commandMap = new HashMap<>();
 
-            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-                e.printStackTrace();
-            }
-
-            if (!method.isAnnotationPresent(CustomCommand.class)) {
-                continue;
-            }
+            //for (Method method : clazz.getMethods()) {
+            for (Method method : commandClass.getMethods()) {
+                Object object = null;
+                String name = commandClass.getName();
+                try {
+                    Class<?> clazz = Class.forName(name);
+                    object = clazz.newInstance();
 
 
-            Class<?>[] parameterType = method.getParameterTypes();
-
-            if (parameterType.length > 3)
-                if (parameterType[0] != CommandSender.class || parameterType[1] != Command.class || parameterType[2] != String[].class) {
-                    Bukkit.getLogger().log(Level.SEVERE, "Unable to register command " + method.getName() + ".");
+                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+                    e.printStackTrace();
                 }
-            final CustomCommand command = method.getAnnotation(CustomCommand.class);
 
-            final BukkitCommand customCommand = new BukkitCommand(command.name(), command.permission(), command.usage(), command.description(), command.aliases(), method, object);
+                if (!method.isAnnotationPresent(CustomCommand.class)) {
+                    continue;
+                }
 
-            final BukkitCommandExtension bukkitCommandExtension = new BukkitCommandExtension(customCommand, this);
 
-            commandMap.put(customCommand.getName(), customCommand);
-            commands.put(customCommand, object);
-            map.register(plugin.getName(), bukkitCommandExtension);
+                Class<?>[] parameterType = method.getParameterTypes();
 
-        }
+                if (parameterType.length > 3)
+                    if (parameterType[0] != CommandSender.class || parameterType[1] != Command.class || parameterType[2] != String[].class) {
+                        Bukkit.getLogger().log(Level.SEVERE, "Unable to register command " + method.getName() + ".");
+                    }
+                final CustomCommand command = method.getAnnotation(CustomCommand.class);
 
-        for (Method method : commandClass.getMethods()) {
-            Object object = method.getClass();
+                final BukkitCommand customCommand = new BukkitCommand(command.name(), command.permission(), command.usage(), command.description(), command.aliases(), method, object);
 
-            if (!method.isAnnotationPresent(SubCommand.class)) {
-                continue;
+                final BukkitCommandExtension bukkitCommandExtension = new BukkitCommandExtension(customCommand, this);
+
+                commandMap.put(customCommand.getName(), customCommand);
+                commands.put(customCommand, object);
+                map.register(plugin.getName(), bukkitCommandExtension);
+
             }
 
-            Class<?>[] parameterType = method.getParameterTypes();
+            for (Method method : commandClass.getMethods()) {
+                Object object = method.getClass();
 
-            if (parameterType.length > 3)
-                if (parameterType[0] != CommandSender.class || parameterType[1] != Command.class || parameterType[2] != String[].class) {
-                    Bukkit.getLogger().log(Level.SEVERE, "Unable to register subcommand " + method.getName() + ".");
+                if (!method.isAnnotationPresent(SubCommand.class)) {
+                    continue;
                 }
+
+                Class<?>[] parameterType = method.getParameterTypes();
+
+                if (parameterType.length > 3)
+                    if (parameterType[0] != CommandSender.class || parameterType[1] != Command.class || parameterType[2] != String[].class) {
+                        Bukkit.getLogger().log(Level.SEVERE, "Unable to register subcommand " + method.getName() + ".");
+                    }
                 SubCommand subCommand = method.getAnnotation(SubCommand.class);
                 BukkitCommand parent = commandMap.get(subCommand.parent());
                 if (parent == null) {
@@ -95,18 +98,19 @@ public class CommandFramework implements CommandExecutor {
                 }
 
                 BukkitCommand command = new BukkitCommand(
-                  subCommand.name(),
-                  subCommand.permission(),
-                  subCommand.usage(),
-                  subCommand.description(),
-                  new String[0],
-                  method,
-                  object
+                        subCommand.name(),
+                        subCommand.permission(),
+                        subCommand.usage(),
+                        subCommand.description(),
+                        new String[0],
+                        method,
+                        object
                 );
 
                 parent.addSubCommand(command);
 
 
+            }
         }
 
     }
@@ -145,33 +149,37 @@ public class CommandFramework implements CommandExecutor {
                     for (BukkitCommand subCommand : bukkitCommand.getSubCommands()) {
                         Method subMethod = subCommand.getMethod();
 
-                        Object obj = null;
-                        String name = commandClass.getName();
-                        try {
-                            Class<?> clazz = Class.forName(name);
-                            obj = clazz.newInstance();
+                        for (Class commandClass : commandClasses) {
+                            Object obj = null;
+                            String name = commandClass.getName();
+                            try {
+                                Class<?> clazz = Class.forName(name);
+                                obj = clazz.newInstance();
 
 
-                        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-                            e.printStackTrace();
+                            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+                                e.printStackTrace();
+                            }
+
+
+                            SubCommand command = subMethod.getAnnotation(SubCommand.class);
+                            if (!command.permission().isEmpty() && !commandSender.hasPermission(command.permission())) {
+                                //TODO: DI Error message from subclass
+                                commandSender.sendMessage("You don't have permission for that!");
+                                return true;
+                            }
+
+
+                            if (!strings[0].equalsIgnoreCase(command.name())) continue;
+
+                            try {
+                                subMethod.invoke(obj, commandSender, cmd, strings);
+                            } catch (IllegalAccessException | InvocationTargetException e) {
+                                e.printStackTrace();
+                            }
                         }
 
 
-                        SubCommand command = subMethod.getAnnotation(SubCommand.class);
-                        if (!command.permission().isEmpty() && !commandSender.hasPermission(command.permission())) {
-                            //TODO: DI Error message from subclass
-                            commandSender.sendMessage("You don't have permission for that!");
-                            return true;
-                        }
-
-
-                        if (!strings[0].equalsIgnoreCase(command.name())) continue;
-
-                        try {
-                            subMethod.invoke(obj, commandSender, cmd, strings);
-                        } catch (IllegalAccessException | InvocationTargetException e) {
-                            e.printStackTrace();
-                        }
                     }
                 }
             }

@@ -20,11 +20,29 @@ import java.util.Map;
  */
 public class CustomInventory implements InventoryHolder {
 
-    Inventory inventory;
-    InventoryHolder holder;
+    /**
+     * Target inventory that is modified
+     */
+    private Inventory inventory;
+
+    /**
+     * Boolean for whether the itemclickevent should be cancelled
+     */
     private boolean cancelEvent = false;
+
+    /**
+     * Variable for storing the amount of slots in the inventory
+     */
     private int slots;
+
+    /**
+     * Variable for storing the displayname of the CustomInventory
+     */
     private String displayName;
+
+    /**
+     * Map for storing the slots and their events (MenuItem handling)
+     */
     private Map<Integer, MenuItem> items = new HashMap<>();
 
     /**
@@ -35,15 +53,18 @@ public class CustomInventory implements InventoryHolder {
     public CustomInventory(int slots, String displayName) {
         this.slots = slots;
         this.displayName = ChatColor.translateAlternateColorCodes('&', displayName);
-        this.holder = this;
 
         inventory = Bukkit.createInventory(this, slots, ChatColor.translateAlternateColorCodes('&', displayName));
     }
 
+    /**
+     * Creates a CustomInventory off of arguments
+     * @param type
+     * @param displayName
+     */
     public CustomInventory(InventoryType type, String displayName) {
         this.slots = type.getDefaultSize();
         this.displayName = ChatUtils.translate(displayName);
-        this.holder = this;
 
         this.inventory = Bukkit.createInventory(this, type, displayName);
     }
@@ -59,21 +80,42 @@ public class CustomInventory implements InventoryHolder {
         }
     }
 
+    /**
+     * Fills the inventory with an itemstack with a start and end
+     * @param start
+     * @param end
+     * @param stack
+     */
     public void fill(int start, int end, ItemStack stack) {
         for (int i = start; i < end; i++) {
             inventory.setItem(i, stack);
         }
     }
 
+    /**
+     * Sets an itemstack at a specific index
+     * @param index
+     * @param stack
+     */
     public void setItem(int index, ItemStack stack) {
         getInventory().setItem(index, stack);
     }
 
+    /**
+     * Sets a menuitem with an event at a specific index
+     * @param index
+     * @param item
+     */
     public void setItem(int index, MenuItem item) {
         items.put(index, item);
         getInventory().setItem(index, item);
     }
 
+    /**
+     * Retrieves an item at a specific index
+     * @param index
+     * @return
+     */
     public ItemStack getItem(int index) {
         return getInventory().getItem(index);
     }

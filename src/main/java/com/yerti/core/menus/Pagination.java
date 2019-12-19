@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Used to retrieve the amount of pages needed in a gui
+ * @param <T>
+ */
 public class Pagination<T> extends ArrayList<T> {
 
     private int pageSize;
@@ -11,6 +15,7 @@ public class Pagination<T> extends ArrayList<T> {
     public Pagination(int pageSize) {
         this(pageSize, new ArrayList<T>());
     }
+
 
     @SafeVarargs
     public Pagination(int pageSize, T... objects) {
@@ -22,18 +27,34 @@ public class Pagination<T> extends ArrayList<T> {
         addAll(objects);
     }
 
+    /**
+     * @return the page size
+     */
     public int pageSize() {
         return pageSize;
     }
 
+    /**
+     * @return the total pages needed
+     */
     public int totalPages() {
         return (int) Math.ceil((double) size() / pageSize);
     }
 
+    /**
+     * Checks if a page at a specific index exists or not
+     * @param page
+     * @return whether it exists
+     */
     public boolean exists(int page) {
         return !(page < 0) && page < totalPages();
     }
 
+    /**
+     * Retrieves a page at a specific index
+     * @param page
+     * @return a list of the object at that page
+     */
     public List<T> getPage(int page) {
         if(page < 0 || page >= totalPages()) throw new IndexOutOfBoundsException("Index: " + page + ", Size: " + totalPages());
 

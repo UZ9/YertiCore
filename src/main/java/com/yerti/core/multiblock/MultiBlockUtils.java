@@ -8,7 +8,15 @@ import org.bukkit.Material;
 
 public class MultiBlockUtils {
 
-    //Find outer box: ceil(size / 2)
+    /**
+     * Checks for if a MultiBlockPattern exists at a location, assuming the block clicked is the center
+     * @param loc
+     * @param xSize
+     * @param ySize
+     * @param zSize
+     * @param pattern
+     * @return
+     */
     public static boolean found(Location loc, int xSize, int ySize, int zSize, MultiBlockPattern pattern) {
         loc = loc.subtract(Math.ceil(xSize / 2.) - 1, Math.ceil(ySize / 2.) - 1, Math.ceil(zSize / 2.) - 1);
 

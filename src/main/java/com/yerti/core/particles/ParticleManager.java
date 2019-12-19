@@ -13,6 +13,13 @@ import org.bukkit.util.Vector;
 
 public class ParticleManager {
 
+    /**
+     * Sends a colored particle to a location
+     * @param location
+     * @param r
+     * @param g
+     * @param b
+     */
     public static void sendColorParticle(Location location, int r, int g, int b) {
         PacketPlayOutWorldParticles particles = new PacketPlayOutWorldParticles(EnumParticle.FLAME, true, (float) location.getX(), (float) location.getY(), (float) location.getZ(), r, g, b, (float) 255,0, 10);
 
@@ -22,6 +29,14 @@ public class ParticleManager {
 
     }
 
+    /**
+     * Draws a line of particles between 2 locations
+     * @param start
+     * @param end
+     * @param r
+     * @param b
+     * @param g
+     */
     public static void drawLine(Location start, Location end, int r, int b, int g) {
         World world = start.getWorld();
 

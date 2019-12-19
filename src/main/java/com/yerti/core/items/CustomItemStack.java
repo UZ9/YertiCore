@@ -100,6 +100,11 @@ public class CustomItemStack extends ItemStack {
         return this;
     }
 
+    /**
+     * Gets the lore of the itemstack at a specific index
+     * @param index
+     * @return
+     */
     public String getLore(int index) {
         ItemMeta meta = getItemMeta();
         return meta.getLore().get(index);
@@ -153,6 +158,11 @@ public class CustomItemStack extends ItemStack {
         return this;
     }
 
+    /**
+     * Adds an itemflag to the itemstack
+     * @param flag
+     * @return
+     */
     public CustomItemStack addFlag(ItemFlag flag) {
         ItemMeta meta = getItemMeta();
         meta.addItemFlags(flag);
@@ -160,6 +170,12 @@ public class CustomItemStack extends ItemStack {
         return this;
     }
 
+    /**
+     * Enchants the itemstack with an enchantment at a certain level
+     * @param enchantment
+     * @param level
+     * @return
+     */
     public CustomItemStack enchant(Enchantment enchantment, int level) {
         ItemMeta meta = getItemMeta();
         meta.addEnchant(enchantment, level, true);
@@ -167,11 +183,20 @@ public class CustomItemStack extends ItemStack {
         return this;
     }
 
+    /**
+     * Sets the durability/damage of an itemstack
+     * @param damage
+     * @return
+     */
     public CustomItemStack damage(int damage) {
         setDurability((short) damage);
         return this;
     }
 
+    /**
+     * Strips the lore of an itemstack
+     * @return
+     */
     public CustomItemStack stripLore() {
         ItemMeta meta = getItemMeta();
         meta.setLore(new ArrayList<>());
@@ -179,6 +204,11 @@ public class CustomItemStack extends ItemStack {
         return this;
     }
 
+    /**
+     * Removes the lore of the itemstack at a specific index
+     * @param index
+     * @return
+     */
     public CustomItemStack removeLore(int index) {
         ItemMeta meta = getItemMeta();
         List<String> lore = meta.getLore();
@@ -188,6 +218,11 @@ public class CustomItemStack extends ItemStack {
         return this;
     }
 
+    /**
+     * Sets the amount of the itemstack
+     * @param amount
+     * @return
+     */
     public CustomItemStack amount(int amount) {
         this.setAmount(amount);
         return this;
