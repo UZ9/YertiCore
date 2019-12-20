@@ -1,5 +1,6 @@
 package com.yerti.core.particles;
 
+import com.yerti.core.utils.NMSUtils;
 import net.minecraft.server.v1_8_R3.EnumParticle;
 import net.minecraft.server.v1_8_R3.PacketPlayOutWorldParticles;
 import org.apache.commons.lang.Validate;
@@ -9,6 +10,8 @@ import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
+
+import java.util.Objects;
 
 
 public class ParticleManager {
@@ -21,10 +24,33 @@ public class ParticleManager {
      * @param b
      */
     public static void sendColorParticle(Location location, int r, int g, int b) {
+        Class<?> playOutWorldParticles = NMSUtils.getNMSClass("PacketPlayOutWorldParticles");
+
+
+
         PacketPlayOutWorldParticles particles = new PacketPlayOutWorldParticles(EnumParticle.FLAME, true, (float) location.getX(), (float) location.getY(), (float) location.getZ(), r, g, b, (float) 255,0, 10);
 
         for (Player player : Bukkit.getOnlinePlayers()) {
-            ((CraftPlayer) player).getHandle().playerConnection.sendPacket(particles);
+            try {
+                Class<?> particleEnum = NMSUtils.getNMSClass("EnumParticle");
+                Object flameValue = NMSUtils.getEnum(Objects.requireNonNull(particleEnum), "FLAME");
+
+
+
+
+
+                Object particlePacket = Objects.requireNonNull(NMSUtils.getNMSClass("PacketPlayOutWorldParticles")).getConstructor(NMSUtils.getNMSClass("EnumParticle"), boolean.class, float.class, float.class, float.class, float.class, float.class, float.class, float.class, float.class, int.class).newInstance(flameValue, true, (float) location.getX(), (float) location.getY(), (float) location.getZ(), r, g, b, (float) 255,0, 10);
+                NMSUtils.sendPacket(player, particlePacket);
+
+                Bukkit.broadcastMessage("Played packet");
+
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            //((CraftPlayer) player).getHandle().playerConnection.sendPacket(particles);
         }
 
     }

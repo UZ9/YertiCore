@@ -3,11 +3,14 @@ package com.yerti.core.utils;
 
 import com.yerti.core.YertiPlugin;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class NMSUtils {
 
@@ -161,6 +164,45 @@ public class NMSUtils {
             }
         return equal;
     }
+
+    public static Object getConnection(Player player) {
+        try {
+            return Objects.requireNonNull(getField(Objects.requireNonNull(getHandle(player)).getClass(), "playerConnection")).get(getHandle(player));
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+
+
+        return null;
+    }
+
+    public static void sendPacket(Player player, Object packet) {
+
+        Object connection = getConnection(player);
+
+        try {
+            Objects.requireNonNull(connection).getClass().getMethod("sendPacket", getNMSClass("Packet")).invoke(connection, packet);
+        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Object getEnum(Class<?> clazz, String value) {
+        if (!clazz.isEnum()) return null;
+
+        Method method = getMethod(clazz, "valueOf", String.class);
+        try {
+            Object enumObject = Objects.requireNonNull(method).invoke(value);
+            return enumObject;
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+
+    }
+
 
 
 
