@@ -1,11 +1,11 @@
 package com.yerti.core.command;
 
+import com.yerti.banditgames.core.YertiPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.CommandSender;
-import org.bukkit.plugin.Plugin;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -16,79 +16,76 @@ import java.util.logging.Level;
 
 public class CommandFramework implements CommandExecutor {
 
-    private final Plugin plugin;
+    private final YertiPlugin plugin;
     private Map<BukkitCommand, Object> commands = new HashMap<>();
     private CommandMap map;
-    private Class[] commandClasses;
+    private Class commandClass;
 
-    /**
-     * Creates a new framework with classses that have command annotations
-     * @param plugin
-     * @param commandClasses
-     */
-    public CommandFramework(Plugin plugin, Class... commandClasses) {
+    public CommandFramework(YertiPlugin plugin, Class commandClass) {
         this.plugin = plugin;
         map = getCommandMap();
-        this.commandClasses = commandClasses;
+        this.commandClass = commandClass;
 
         registerCommands();
+
+
+
+
+
     }
 
-    private void registerCommands() {
+    public void registerCommands() {
+        final Map<String, BukkitCommand> commandMap = new HashMap<>();
 
-        for (Class commandClass : commandClasses) {
-
-            final Map<String, BukkitCommand> commandMap = new HashMap<>();
-
-            //for (Method method : clazz.getMethods()) {
-            for (Method method : commandClass.getMethods()) {
-                Object object = null;
-                String name = commandClass.getName();
-                try {
-                    Class<?> clazz = Class.forName(name);
-                    object = clazz.newInstance();
+        //for (Method method : clazz.getMethods()) {
+        for (Method method  : commandClass.getMethods()) {
+            Object object = null;
+            String name = commandClass.getName();
+            try {
+                Class<?> clazz = Class.forName(name);
+                object = clazz.newInstance();
 
 
-                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-
-                if (!method.isAnnotationPresent(CustomCommand.class)) {
-                    continue;
-                }
-
-
-                Class<?>[] parameterType = method.getParameterTypes();
-
-                if (parameterType.length > 3)
-                    if (parameterType[0] != CommandSender.class || parameterType[1] != Command.class || parameterType[2] != String[].class) {
-                        Bukkit.getLogger().log(Level.SEVERE, "Unable to register command " + method.getName() + ".");
-                    }
-                final CustomCommand command = method.getAnnotation(CustomCommand.class);
-
-                final BukkitCommand customCommand = new BukkitCommand(command.name(), command.permission(), command.usage(), command.description(), command.aliases(), method, object);
-
-                final BukkitCommandExtension bukkitCommandExtension = new BukkitCommandExtension(customCommand, this);
-
-                commandMap.put(customCommand.getName(), customCommand);
-                commands.put(customCommand, object);
-                map.register(plugin.getName(), bukkitCommandExtension);
-
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+                e.printStackTrace();
             }
 
-            for (Method method : commandClass.getMethods()) {
-                Object object = method.getClass();
+            if (!method.isAnnotationPresent(CustomCommand.class)) {
+                continue;
+            }
 
-                if (!method.isAnnotationPresent(SubCommand.class)) {
-                    continue;
+
+            Class<?>[] parameterType = method.getParameterTypes();
+
+            if (parameterType.length > 3)
+                if (parameterType[0] != CommandSender.class || parameterType[1] != Command.class || parameterType[2] != String[].class) {
+                    Bukkit.getLogger().log(Level.SEVERE, "Unable to register command " + method.getName() + ".");
                 }
+            final CustomCommand command = method.getAnnotation(CustomCommand.class);
 
-                Class<?>[] parameterType = method.getParameterTypes();
+            final BukkitCommand customCommand = new BukkitCommand(command.name(), command.permission(), command.usage(), command.description(), command.aliases(), method, object);
 
-                if (parameterType.length > 3)
-                    if (parameterType[0] != CommandSender.class || parameterType[1] != Command.class || parameterType[2] != String[].class) {
-                        Bukkit.getLogger().log(Level.SEVERE, "Unable to register subcommand " + method.getName() + ".");
-                    }
+            final BukkitCommandExtension bukkitCommandExtension = new BukkitCommandExtension(customCommand, this);
+
+            commandMap.put(customCommand.getName(), customCommand);
+            commands.put(customCommand, object);
+            map.register(plugin.getName(), bukkitCommandExtension);
+
+        }
+
+        for (Method method : commandClass.getMethods()) {
+            Object object = method.getClass();
+
+            if (!method.isAnnotationPresent(SubCommand.class)) {
+                continue;
+            }
+
+            Class<?>[] parameterType = method.getParameterTypes();
+
+            if (parameterType.length > 3)
+                if (parameterType[0] != CommandSender.class || parameterType[1] != Command.class || parameterType[2] != String[].class) {
+                    Bukkit.getLogger().log(Level.SEVERE, "Unable to register subcommand " + method.getName() + ".");
+                }
                 SubCommand subCommand = method.getAnnotation(SubCommand.class);
                 BukkitCommand parent = commandMap.get(subCommand.parent());
                 if (parent == null) {
@@ -98,19 +95,18 @@ public class CommandFramework implements CommandExecutor {
                 }
 
                 BukkitCommand command = new BukkitCommand(
-                        subCommand.name(),
-                        subCommand.permission(),
-                        subCommand.usage(),
-                        subCommand.description(),
-                        new String[0],
-                        method,
-                        object
+                  subCommand.name(),
+                  subCommand.permission(),
+                  subCommand.usage(),
+                  subCommand.description(),
+                  new String[0],
+                  method,
+                  object
                 );
 
                 parent.addSubCommand(command);
 
 
-            }
         }
 
     }
@@ -139,7 +135,7 @@ public class CommandFramework implements CommandExecutor {
                 if (bukkitCommand.getSubCommands().isEmpty() || strings.length == 0) {
 
                     try {
-                        method.invoke(object, commandSender, cmd, strings);
+                        method.invoke(object, plugin, commandSender, cmd, strings);
 
                     } catch (IllegalAccessException | InvocationTargetException e) {
                         e.printStackTrace();
@@ -149,37 +145,33 @@ public class CommandFramework implements CommandExecutor {
                     for (BukkitCommand subCommand : bukkitCommand.getSubCommands()) {
                         Method subMethod = subCommand.getMethod();
 
-                        for (Class commandClass : commandClasses) {
-                            Object obj = null;
-                            String name = commandClass.getName();
-                            try {
-                                Class<?> clazz = Class.forName(name);
-                                obj = clazz.newInstance();
+                        Object obj = null;
+                        String name = commandClass.getName();
+                        try {
+                            Class<?> clazz = Class.forName(name);
+                            obj = clazz.newInstance();
 
 
-                            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-                                e.printStackTrace();
-                            }
-
-
-                            SubCommand command = subMethod.getAnnotation(SubCommand.class);
-                            if (!command.permission().isEmpty() && !commandSender.hasPermission(command.permission())) {
-                                //TODO: DI Error message from subclass
-                                commandSender.sendMessage("You don't have permission for that!");
-                                return true;
-                            }
-
-
-                            if (!strings[0].equalsIgnoreCase(command.name())) continue;
-
-                            try {
-                                subMethod.invoke(obj, commandSender, cmd, strings);
-                            } catch (IllegalAccessException | InvocationTargetException e) {
-                                e.printStackTrace();
-                            }
+                        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+                            e.printStackTrace();
                         }
 
 
+                        SubCommand command = subMethod.getAnnotation(SubCommand.class);
+                        if (!command.permission().isEmpty() && !commandSender.hasPermission(command.permission())) {
+                            //TODO: DI Error message from subclass
+                            commandSender.sendMessage("You don't have permission for that!");
+                            return true;
+                        }
+
+
+                        if (!strings[0].equalsIgnoreCase(command.name())) continue;
+
+                        try {
+                            subMethod.invoke(obj, plugin, commandSender, cmd, strings);
+                        } catch (IllegalAccessException | InvocationTargetException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }

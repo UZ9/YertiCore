@@ -5,13 +5,8 @@ import java.util.Base64;
 
 public class SerializationUtils {
 
-    /**
-     * Attempts to read an object from a Base64 serialized string
-     * @param s serialized string
-     * @return unserialized object
-     * @throws IOException
-     * @throws ClassNotFoundException
-     */
+
+    /** Read the object from Base64 string. */
     public static Object fromString( String s ) throws IOException ,
             ClassNotFoundException {
         byte [] data = Base64.getDecoder().decode( s );
@@ -26,12 +21,7 @@ public class SerializationUtils {
         return o;
     }
 
-    /**
-     * Attempts to serialize an {@link Serializable} object
-     * @param o
-     * @return the serialized object
-     * @throws IOException
-     */
+    /** Write the object to a Base64 string. */
     public static String toString( Serializable o ) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream( baos );

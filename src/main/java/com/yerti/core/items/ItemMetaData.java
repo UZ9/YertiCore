@@ -8,28 +8,9 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 public class ItemMetaData {
-
-    //TODO: Replace with NMSUtils
-
-    /**
-     * Sets the metdata information of an itemstack with a value
-     * @param item
-     * @param metadata
-     * @param value
-     * @return
-     */
     public static org.bukkit.inventory.ItemStack setMetadata(org.bukkit.inventory.ItemStack item, String metadata, Object value){
         return CraftItemStack.asBukkitCopy(setMetadata(CraftItemStack.asNMSCopy(item), metadata, value));
     }
-
-
-    /**
-     * Sets the metadata of an itemstack with a value
-     * @param item
-     * @param metadata
-     * @param value
-     * @return
-     */
     public static ItemStack setMetadata(ItemStack item, String metadata, Object value){
         if(item.getTag() == null){
             item.setTag(new NBTTagCompound());
@@ -37,54 +18,27 @@ public class ItemMetaData {
         setTag(item.getTag(), metadata, value);
         return item;
     }
-
-    /**
-     * Checks if an object has a specific key of metadata
-     * @param item
-     * @param metadata
-     * @return
-     */
     public static boolean hasMetadata(org.bukkit.inventory.ItemStack item, String metadata){
         return hasMetadata(CraftItemStack.asNMSCopy(item), metadata);
     }
-
-    /**
-     * Checks if an object has a specific key of metadata
-     * @param item
-     * @param metadata
-     * @return
-     */
     public static boolean hasMetadata(ItemStack item, String metadata){
         return item.getTag() != null && item.getTag().hasKey(metadata);
     }
-
-    /**
-     * Retrieves the metadata of a key from an item
-     * @param item
-     * @param metadata
-     * @return
-     */
     public static Object getMetadata(org.bukkit.inventory.ItemStack item, String metadata){
         return getMetadata(CraftItemStack.asNMSCopy(item), metadata);
     }
-
-    /**
-     * Retrieves the metadata of a key from an item
-     * @param item
-     * @param metadata
-     * @return
-     */
     public static Object getMetadata(ItemStack item, String metadata){
         if(!hasMetadata(item, metadata))return null;
         return getObject(item.getTag().get(metadata));
     }
-
     private static NBTTagCompound setTag(NBTTagCompound tag, String tagString, Object value) {
 
         NBTBase base = null;
 
         if (value instanceof Boolean) {
             base = new NBTTagByte((byte)(((Boolean)value).booleanValue() ? 1 : 0));
+        } else if (value instanceof Long) {
+            base = new NBTTagLong((Long) value);
         } else if (value instanceof Integer) {
             base = new NBTTagInt((Integer) value);
         } else if (value instanceof Byte) {
@@ -97,8 +51,6 @@ public class ItemMetaData {
             base = new NBTTagString((String) value);
         } else if (value instanceof Short) {
             base = new NBTTagShort((Short) value);
-        } else if (value instanceof Long) {
-            base = new NBTTagLong((Long) value);
         }
 
         if(base != null){
@@ -107,26 +59,22 @@ public class ItemMetaData {
 
         return tag;
     }
-
     @SuppressWarnings("unchecked")
-    /**
-     * Retrieves an object off ofo an NBTTag (Still in development, may not be used)
-     */
     private static Object getObject(NBTBase tag){
         if(tag instanceof NBTTagEnd){
             return null;
+        }else if(tag instanceof NBTTagLong){
+            return ((NBTTagLong) tag).c();
         }else if(tag instanceof NBTTagByte){
             return ((NBTTagByte) tag).f();
         }else if(tag instanceof NBTTagShort){
             return ((NBTTagShort) tag).e();
         }else if(tag instanceof NBTTagInt){
-            return ((NBTTagInt) tag).e();
-        }else if(tag instanceof NBTTagLong){
-            return ((NBTTagLong) tag).d();
+            return ((NBTTagInt) tag).d();
         }else if(tag instanceof NBTTagFloat){
             return ((NBTTagFloat) tag).h();
         }else if(tag instanceof NBTTagDouble){
-            return ((NBTTagDouble) tag).h();
+            return ((NBTTagDouble) tag).g();
         }else if(tag instanceof NBTTagByteArray){
             return ((NBTTagByteArray) tag).c();
         }else if(tag instanceof NBTTagString){
@@ -153,5 +101,4 @@ public class ItemMetaData {
         }
         return null;
     }
-
 }

@@ -9,29 +9,26 @@ public class MultiBlockPattern {
 
     private String[][] pattern;
     private Map<Character, Material> key = new HashMap<>();
-    /**
-     * Creates a builder based off of a pattern
-     * @param pattern
-     */
-    public MultiBlockPattern(String[][] pattern) {
+
+
+    //x
+    //x
+    //x
+
+
+    //[0][0] 3@3
+    //[0][1] 333
+    //[0][2] 333
+
+    public  MultiBlockPattern(String[][] pattern) {
         this.pattern = pattern;
     }
 
-    /**
-     * Adds a key to the multiblock structure using a key-value system
-     * @param key
-     * @param type
-     * @return
-     */
     public MultiBlockPattern addKey(char key, Material type) {
         this.key.put(key, type);
         return this;
     }
 
-    /**
-     * Builds a material matrix of the MultiBlockPattern
-     * @return
-     */
     public Material[][][] build() {
         Material[][][] built = new Material[pattern.length][pattern[0].length][pattern[0].length];
 

@@ -257,7 +257,7 @@ public class Title {
                 packet = packetTitle.getConstructor(packetActions,
                         chatBaseComponent).newInstance(actions[0], serialized);
                 sendPacket.invoke(connection, packet);
-                if (subtitle != "") {
+                if (!subtitle.equals("")) {
                     // Send subtitle if present
                     serialized = nmsChatSerializer.getConstructor(String.class)
                             .newInstance(
@@ -287,14 +287,15 @@ public class Title {
                         new Class[] { Title.packetActions, chatBaseComponent,
                                 Integer.TYPE, Integer.TYPE, Integer.TYPE })
                         .newInstance(
-                                actions[2],
-                                null,
-                                this.fadeInTime
-                                        * (this.ticks ? 1 : 20),
-                                this.stayTime
-                                        * (this.ticks ? 1 : 20),
-                                this.fadeOutTime
-                                        * (this.ticks ? 1 : 20));
+                                new Object[] {
+                                        actions[2],
+                                        null,
+                                        Integer.valueOf(this.fadeInTime
+                                                * (this.ticks ? 1 : 20)),
+                                        Integer.valueOf(this.stayTime
+                                                * (this.ticks ? 1 : 20)),
+                                        Integer.valueOf(this.fadeOutTime
+                                                * (this.ticks ? 1 : 20)) });
                 if ((this.fadeInTime != -1) && (this.fadeOutTime != -1)
                         && (this.stayTime != -1)) {
                     sendPacket.invoke(connection, packet);
@@ -335,7 +336,6 @@ public class Title {
         if (Title.packetTitle != null) {
             try {
                 Object handle = getHandle(player);
-                assert handle != null;
                 Object connection = getField(handle.getClass(),
                         "playerConnection").get(handle);
                 Object[] actions = Title.packetActions.getEnumConstants();
@@ -350,7 +350,7 @@ public class Title {
                         .getConstructor(
                                 new Class[] { Title.packetActions,
                                         chatBaseComponent }).newInstance(
-                                actions[1], serialized);
+                                new Object[] { actions[1], serialized });
                 sendPacket.invoke(connection, packet);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -412,8 +412,8 @@ public class Title {
     }
 
     private Class<?> getPrimitiveType(Class<?> clazz) {
-        return CORRESPONDING_TYPES
-                .getOrDefault(clazz, clazz);
+        return CORRESPONDING_TYPES.containsKey(clazz) ? CORRESPONDING_TYPES
+                .get(clazz) : clazz;
     }
 
     private Class<?>[] toPrimitiveTypeArray(Class<?>[] classes) {
@@ -455,10 +455,8 @@ public class Title {
 
     private String getVersion() {
         String name = Bukkit.getServer().getClass().getPackage().getName();
-        String version = name.substring(name.lastIndexOf('.') + 1) + ".";
-        return version;
+        return name.substring(name.lastIndexOf('.') + 1) + ".";
     }
-
 
     private Class<?> getNMSClass(String className) {
         String fullName = "net.minecraft.server." + getVersion() + className;

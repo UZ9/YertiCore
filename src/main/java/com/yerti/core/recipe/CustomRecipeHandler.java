@@ -10,7 +10,8 @@ import java.util.Map;
 
 public class CustomRecipeHandler implements Listener {
 
-    //Handles all of the crafting recipes
+
+
     @EventHandler
     public void onPrepareCraft(PrepareItemCraftEvent event) {
 

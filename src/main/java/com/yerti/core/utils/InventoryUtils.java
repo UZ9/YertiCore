@@ -1,5 +1,8 @@
 package com.yerti.core.utils;
 
+
+import com.yerti.banditgames.core.items.CustomItemStack;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -29,9 +32,8 @@ public class InventoryUtils {
 
         }
 
-        if (freeSpace >= itemStack.getAmount()) return true;
+        return freeSpace >= itemStack.getAmount();
 
-        return false;
     }
 
     /**
@@ -57,9 +59,8 @@ public class InventoryUtils {
 
         }
 
-        if (freeSpace >= itemStack.getAmount()) return true;
+        return freeSpace >= itemStack.getAmount();
 
-        return false;
     }
 
     /**
@@ -81,6 +82,73 @@ public class InventoryUtils {
         }
 
         return freeSlots >= slots;
+    }
+
+    /**
+     * Returns the amount of a material in a given inventory
+     * @param inventory
+     * @param material
+     * @return
+     */
+    public static int getItemCount(Inventory inventory, Material material) {
+        int amount = 0;
+        for (ItemStack stack : inventory.all(material).values()) {
+            amount += stack.getAmount();
+
+        }
+
+        return amount;
+    }
+
+    /**
+     * Returns the amount of an itemstack in a given inventory
+     * @param inventory
+     * @param item
+     * @return
+     */
+    public static int getItemCount(Inventory inventory, ItemStack item) {
+        int amount = 0;
+        for (ItemStack stack : inventory.getContents()) {
+            if (stack == null || stack.getType() == Material.AIR) continue;
+
+            if (new CustomItemStack(stack).isSimilar(item)) {
+                amount += stack.getAmount();
+            }
+        }
+
+        return amount;
+    }
+
+    /**
+     * Removes an amount of a material from an inventory
+     * @param inventory
+     * @param stack
+     * @param amount
+     * @return
+     */
+    public static int removeItems(Inventory inventory, ItemStack stack, int amount) {
+
+        if(stack == null || inventory == null || stack.getType() == Material.AIR)
+            return -1;
+        if (amount <= 0)
+            return -1;
+
+        for (ItemStack invStack : inventory.getContents()) {
+            if (invStack == null) continue;
+            if (amount == 0) return 1;
+
+            if (new CustomItemStack(stack).isSimilar(invStack)) {
+                if (invStack.getAmount() <= amount) {
+                    inventory.remove(invStack);
+                    amount  -= invStack.getAmount();
+                } else {
+                    invStack.setAmount(invStack.getAmount() - amount);
+                    amount =0;
+                }
+            }
+        }
+
+        return 1;
     }
 
 

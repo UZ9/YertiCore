@@ -4,13 +4,18 @@ import org.bukkit.ChatColor;
 
 public class ChatUtils {
 
-    /**
-     * Translates a message as an easier way of doing {@link ChatColor#translateAlternateColorCodes(char, String)}
-     * @param message message parameter
-     * @return formatted message
-     */
+    private static String prefix = "";
+
+    public static void setPrefix(String prefix) {
+        ChatUtils.prefix = prefix;
+    }
+
     public static String translate(String message) {
-        return ChatColor.translateAlternateColorCodes('&', message);
+        return ChatColor.translateAlternateColorCodes('&', prefix + " " + message);
+    }
+
+    public static String translateWithoutPrefix(String message) {
+        return ChatColor.translateAlternateColorCodes('&',  message);
     }
 
 }

@@ -6,9 +6,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 
-/**
- * Protects models from being damaged
- */
 public class ModelProtection implements Listener {
 
     @EventHandler

@@ -33,6 +33,11 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver</artifactId>
+            <version>3.2.2</version>
+        </dependency>
         <!--org.bukkit:craftbukkit:1.8.8-R0.1-SNAPSHOT-->
 
 

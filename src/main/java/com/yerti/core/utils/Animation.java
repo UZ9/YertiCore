@@ -1,7 +1,6 @@
 package com.yerti.core.utils;
 
-
-import com.yerti.core.YertiPlugin;
+import com.yerti.banditgames.core.YertiPlugin;
 import org.bukkit.Bukkit;
 
 public class Animation {
@@ -12,10 +11,6 @@ public class Animation {
     private Runnable[] runnables;
     private Runnable then;
 
-    /**
-     * Creates a builder-type animation
-     * @param interval time between every animation frame
-     */
     public Animation(int interval) {
         this.interval = interval;
 
@@ -29,49 +24,26 @@ public class Animation {
         }*/
     }
 
-    /**
-     * Sets the frames for the animation
-     * @param runnables
-     * @return
-     */
     public Animation doing(Runnable... runnables) {
         this.runnables = runnables;
         return this;
     }
 
-    /**
-     * Sets the amount of times to do the animation
-     * @param times
-     * @return
-     */
     public Animation times(int times) {
         this.times = times;
         return this;
     }
 
-    /**
-     * Starts the animation
-     * @return
-     */
     public Animation start() {
         runAnimation(0, runnables);
         return this;
     }
 
-    /**
-     * Stops the animation
-     * @return
-     */
     public Animation stop() {
         stopped = true;
         return this;
     }
 
-    /**
-     * Sets an event to execute after the animation has finished
-     * @param runnable
-     * @return
-     */
     public Animation then(Runnable runnable) {
         this.then = runnable;
         return this;

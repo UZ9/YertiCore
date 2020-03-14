@@ -16,14 +16,6 @@ public class CombatEnchant extends Enchantment {
     private Consumer<EntityDamageByEntityEvent> consumer;
 
 
-    /**
-     * Creates a custom combat enchantment with an event on entity damage
-     * @param name
-     * @param maxLevel
-     * @param startLevel
-     * @param id
-     * @param consumer
-     */
     public CombatEnchant(String name, int maxLevel, int startLevel, int id, Consumer<EntityDamageByEntityEvent> consumer) {
         super(id);
         this.name = name;

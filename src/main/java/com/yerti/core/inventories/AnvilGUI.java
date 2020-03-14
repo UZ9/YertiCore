@@ -1,6 +1,5 @@
 package com.yerti.core.inventories;
 
-
 import net.minecraft.server.v1_8_R3.*;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
@@ -36,7 +35,7 @@ public class AnvilGUI {
     /**
      * The text that will be displayed to the user
      */
-    private String text = "";
+    private String text;
     /**
      * A state that decides where the anvil GUI is able to be closed by the user
      */

@@ -10,13 +10,6 @@ public class SQLiteManager {
     private Connection connection;
     File file;
 
-    /**
-     * Creates a new SQLiteManager off of a database, suername and pass
-     * @param plugin
-     * @param database
-     * @param user
-     * @param pass
-     */
     public SQLiteManager(Plugin plugin, String database, String user, String pass) {
 
         try {
@@ -29,15 +22,11 @@ public class SQLiteManager {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();;
+            e.printStackTrace();
         }
 
     }
 
-    /**
-     * Executes a statement
-     * @param param
-     */
     public void execute(String param) {
         try {
             this.connection = DriverManager.getConnection("jdbc:sqlite:" + file.getAbsolutePath());
@@ -51,10 +40,6 @@ public class SQLiteManager {
         }
     }
 
-    /**
-     * Executes an update statement
-     * @param param
-     */
     public void executeUpdate(String param) {
         try {
             this.connection = DriverManager.getConnection("jdbc:sqlite:" + file.getAbsolutePath());
@@ -68,11 +53,6 @@ public class SQLiteManager {
         }
     }
 
-    /**
-     * Queries the database for the statement
-     * @param param
-     * @return ResultSet of the query
-     */
     public ResultSet query(String param) {
         try {
             this.connection = DriverManager.getConnection("jdbc:sqlite:" + file.getAbsolutePath());

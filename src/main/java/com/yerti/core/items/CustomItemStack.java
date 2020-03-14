@@ -134,6 +134,14 @@ public class CustomItemStack extends ItemStack {
         return this;
     }
 
+    public CustomItemStack lore(String... text) {
+        for (String string : text) {
+            lore(string);
+        }
+
+        return this;
+    }
+
     /**
      * Adds lore to a CustomItemStack
      * @param text
@@ -155,6 +163,22 @@ public class CustomItemStack extends ItemStack {
         meta.setLore(lore);
         setItemMeta(meta);
 
+        return this;
+    }
+
+    /**
+     * Applies a glow effect to the item
+     * @return
+     */
+    public CustomItemStack glow()
+    {
+        enchant(Enchantment.ARROW_FIRE, 1);
+        addFlag(ItemFlag.HIDE_ENCHANTS);
+        return this;
+    }
+
+    public CustomItemStack setNBT(String key, Object value) {
+        ItemMetaData.setMetadata(this, key, value);
         return this;
     }
 
@@ -238,6 +262,32 @@ public class CustomItemStack extends ItemStack {
     public String getDisplayName() {
         return getItemMeta().getDisplayName();
     }
+
+    public int getMetaInt(String key) {
+        return (int) ItemMetaData.getMetadata(this, key);
+    }
+
+    public String getMetaString(String key) {
+        return (String) ItemMetaData.getMetadata(this, key);
+    }
+
+    public float getMetaFloat(String key) {
+        return (float) ItemMetaData.getMetadata(this, key);
+    }
+
+    public double getMetaDouble(String key) {
+        return (double) ItemMetaData.getMetadata(this, key);
+    }
+
+    public boolean hasMeta(String key) {
+        return ItemMetaData.hasMetadata(this, key);
+    }
+
+
+
+
+
+
 
 
 

@@ -114,11 +114,6 @@ public class ItemStackUtils {
         }
     }
 
-    /**
-     * Serializes an itemstack and converts it to a JsonObject equivalent
-     * @param item
-     * @return
-     */
     public static JsonObject serializeItemStack(final ItemStack item) {
         final JsonObject json = new JsonObject();
         json.addProperty("type", item.getType().name());
@@ -164,11 +159,6 @@ public class ItemStackUtils {
         return json;
     }
 
-    /**
-     * Deserializes a serialized jsonobject to retrieve an itemstack
-     * @param string
-     * @return
-     */
     public static ItemStack deserializeItemStack(final String string) {
         try {
             final JsonObject json = (JsonObject)parser.parse(string);

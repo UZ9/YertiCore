@@ -11,10 +11,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
  */
 public class InventoryHandler implements Listener {
 
-    /**
-     * Handles the CustomInventory onClick events
-     * @param event
-     */
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         if (event.getInventory().getHolder() instanceof IInventory) {
@@ -24,13 +20,17 @@ public class InventoryHandler implements Listener {
             inventory.onGUI((Player) event.getWhoClicked(), event.getRawSlot(), event.getCurrentItem(), event);
         }
 
+        if (event.getWhoClicked().getOpenInventory().getTopInventory() != null && event.getWhoClicked().getOpenInventory().getTopInventory().getHolder() instanceof CustomInventory) {
+            if (event.isShiftClick()) {
+                event.setCancelled(true);
+            }
+        }
+
         if (event.getInventory().getHolder() instanceof CustomInventory) {
             CustomInventory inventory = (CustomInventory) event.getInventory().getHolder();
-            if (inventory.cancelsEvent() && event.getRawSlot() < 27) event.setCancelled(true);
+            if (inventory.cancelsEvent() && event.getRawSlot() < inventory.getSlots()) event.setCancelled(true);
             System.out.println(inventory.getItems().size());
             if (inventory.getItems().containsKey(event.getSlot())) {
-                System.out.println("Found");
-
                 inventory.getItems().get(event.getSlot()).onClick(event);
             }
 
