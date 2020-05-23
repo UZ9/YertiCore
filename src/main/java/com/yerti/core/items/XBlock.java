@@ -22,16 +22,7 @@ package com.yerti.core.items;
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import com.yerti.banditgames.core.block.BlockUtils;
-import org.bukkit.DyeColor;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
-import org.bukkit.inventory.InventoryHolder;
-import org.bukkit.material.MaterialData;
 
-import java.util.EnumSet;
-import java.util.List;
 
 /*
  * References
@@ -42,6 +33,17 @@ import java.util.List;
  * BlockData (New): https://hub.spigotmc.org/javadocs/spigot/org/bukkit/block/data/BlockData.html
  * MaterialData (Old): https://hub.spigotmc.org/javadocs/spigot/org/bukkit/material/MaterialData.html
  */
+
+import com.yerti.core.block.BlockUtils;
+import org.bukkit.DyeColor;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
+import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.material.MaterialData;
+
+import java.util.EnumSet;
+import java.util.List;
 
 /**
  * <b>XBlock</b> - MaterialData/BlockData Support<br>

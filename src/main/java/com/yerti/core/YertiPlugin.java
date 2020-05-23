@@ -1,11 +1,12 @@
 package com.yerti.core;
 
-import com.yerti.banditgames.core.command.CommandFramework;
-import com.yerti.banditgames.core.enchantmenets.EnchantmentHandler;
-import com.yerti.banditgames.core.entity.ModelProtection;
-import com.yerti.banditgames.core.inventories.InventoryHandler;
-import com.yerti.banditgames.core.recipe.CustomRecipeHandler;
-import com.yerti.banditgames.core.utils.ChatUtils;
+
+import com.yerti.core.command.CommandFramework;
+import com.yerti.core.enchantmenets.EnchantmentHandler;
+import com.yerti.core.entity.ModelProtection;
+import com.yerti.core.inventories.InventoryHandler;
+import com.yerti.core.recipe.CustomRecipeHandler;
+import com.yerti.core.utils.ChatUtils;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 

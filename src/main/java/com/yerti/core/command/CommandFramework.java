@@ -1,6 +1,7 @@
 package com.yerti.core.command;
 
-import com.yerti.banditgames.core.YertiPlugin;
+
+import com.yerti.core.YertiPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
