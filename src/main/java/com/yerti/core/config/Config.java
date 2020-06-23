@@ -1,7 +1,6 @@
 package com.yerti.core.config;
 
 
-
 import com.yerti.core.utils.LocationUtils;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
@@ -56,7 +55,6 @@ public class Config {
         } else {
             config.set(key, value);
         }
-
 
 
     }

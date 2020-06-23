@@ -22,9 +22,9 @@ public class Page {
 
     /**
      * Creates a page with a displayname and size
+     *
      * @param displayName
-     * @param size
-     * For size, {@link Size}
+     * @param size        For size, {@link Size}
      */
     public Page(String displayName, Size size) {
         rowPatterns = new HashMap<>();
@@ -37,7 +37,8 @@ public class Page {
 
     /**
      * Sets the row pattern for a specific row
-     * @param row for the pattern
+     *
+     * @param row     for the pattern
      * @param pattern for the specific row
      * @return
      */
@@ -48,8 +49,9 @@ public class Page {
 
     /**
      * Sets the key for a specific character in the pattern
+     *
      * @param character to set the MenuItem to
-     * @param stack the {@link MenuItem} for the character
+     * @param stack     the {@link MenuItem} for the character
      * @return the page for further modification
      */
     public Page setKey(char character, MenuItem stack) {
@@ -60,6 +62,7 @@ public class Page {
     /**
      * Builds the inventory off of the patterns and keys
      * If a key is not defined for a particular character, the slot will be set to air
+     *
      * @return the result inventory
      */
     public Inventory build() {
@@ -87,8 +90,10 @@ public class Page {
     }
 
     //TODO: Update this to be more efficient and compact
+
     /**
      * Retrieves all of the menu items on the page
+     *
      * @return a list of {@link MenuItem}s
      */
     public List<MenuItem> getMenuItems() {

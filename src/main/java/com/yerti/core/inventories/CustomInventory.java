@@ -29,6 +29,7 @@ public class CustomInventory implements InventoryHolder {
 
     /**
      * Creates a CustomInventory off of arguments
+     *
      * @param slots
      * @param displayName
      */
@@ -40,7 +41,7 @@ public class CustomInventory implements InventoryHolder {
         inventory = Bukkit.createInventory(this, slots, ChatColor.translateAlternateColorCodes('&', displayName));
     }
 
-    public CustomInventory(InventoryType type,  String displayName) {
+    public CustomInventory(InventoryType type, String displayName) {
         this.slots = type.getDefaultSize();
         this.displayName = ChatUtils.translate(displayName);
         this.holder = this;
@@ -80,6 +81,7 @@ public class CustomInventory implements InventoryHolder {
 
     /**
      * Retrieves the inventory
+     *
      * @return the inventory object
      */
     public Inventory getInventory() {
@@ -89,6 +91,7 @@ public class CustomInventory implements InventoryHolder {
 
     /**
      * Fetches the amount of slots in the inventory
+     *
      * @return
      */
     public int getSlots() {
@@ -97,6 +100,7 @@ public class CustomInventory implements InventoryHolder {
 
     /**
      * Sets the amount of slots in the inventory
+     *
      * @param slots
      */
     public void setSlots(int slots) {
@@ -105,6 +109,7 @@ public class CustomInventory implements InventoryHolder {
 
     /**
      * Retrieves the display name for the inventory
+     *
      * @return
      */
     public String getDisplayName() {
@@ -113,6 +118,7 @@ public class CustomInventory implements InventoryHolder {
 
     /**
      * Sets the display name for the inventory
+     *
      * @param displayName
      */
     public void setDisplayName(String displayName) {
@@ -125,6 +131,7 @@ public class CustomInventory implements InventoryHolder {
 
     /**
      * Gets the items with events
+     *
      * @return
      */
     public Map<Integer, MenuItem> getItems() {

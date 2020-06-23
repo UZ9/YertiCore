@@ -8,6 +8,7 @@ public class CustomEntityUtilities {
 
     /**
      * Sets the helmet for a living entity
+     *
      * @param e
      * @param helmet
      */
@@ -18,6 +19,7 @@ public class CustomEntityUtilities {
 
     /**
      * Sets the chestplate for a living entity
+     *
      * @param e
      * @param chestplate
      */
@@ -28,6 +30,7 @@ public class CustomEntityUtilities {
 
     /**
      * Sets the leggings for a living entity
+     *
      * @param e
      * @param leggings
      */
@@ -38,6 +41,7 @@ public class CustomEntityUtilities {
 
     /**
      * Sets the boots for a living entity
+     *
      * @param e
      * @param boots
      */
@@ -48,6 +52,7 @@ public class CustomEntityUtilities {
 
     /**
      * Sets the armor contents for a living entity
+     *
      * @param e
      * @param armor
      */
@@ -59,6 +64,7 @@ public class CustomEntityUtilities {
     /**
      * Sets the hand for a living entity
      * Only for 1.8
+     *
      * @param e
      * @param item
      */

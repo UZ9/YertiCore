@@ -21,6 +21,7 @@ public class CustomItemStack extends ItemStack {
 
     /**
      * Creates a CustomItemStack off of parameters
+     *
      * @param type
      * @param amount
      */
@@ -30,6 +31,7 @@ public class CustomItemStack extends ItemStack {
 
     /**
      * Creates a CustomItemStack off of parameters
+     *
      * @param stack
      */
     public CustomItemStack(ItemStack stack) {
@@ -38,11 +40,12 @@ public class CustomItemStack extends ItemStack {
 
     /**
      * Creates a CustomItemStack off of parameters
-     * @param type Material of the ItemStack
-     * @param amount Amount of the ItemStack
+     *
+     * @param type        Material of the ItemStack
+     * @param amount      Amount of the ItemStack
      * @param displayName Display name of the ItemStack
-     * @param glowing Boolean for whether the item should be glowing
-     * @param lore Lore for the ItemStack
+     * @param glowing     Boolean for whether the item should be glowing
+     * @param lore        Lore for the ItemStack
      */
     public CustomItemStack(Material type, int amount, String displayName, boolean glowing, String... lore) {
         this(type, amount, displayName, glowing);
@@ -53,10 +56,11 @@ public class CustomItemStack extends ItemStack {
 
     /**
      * Creates a CustomItemStack off of parameters
-     * @param type Material of the ItemStack
-     * @param amount Amount of the ItemStack
+     *
+     * @param type        Material of the ItemStack
+     * @param amount      Amount of the ItemStack
      * @param displayName Display name of the ItemStack
-     * @param glowing Boolean for whether the item should be glowing
+     * @param glowing     Boolean for whether the item should be glowing
      */
     public CustomItemStack(Material type, int amount, String displayName, boolean glowing) {
         super(type, amount);
@@ -75,7 +79,6 @@ public class CustomItemStack extends ItemStack {
         ItemStack stack = new ItemStack(Material.STONE, 3, (short) 3);
 
 
-
         if (glowing) {
 
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
@@ -90,6 +93,7 @@ public class CustomItemStack extends ItemStack {
 
     /**
      * Sets the name of the itemstack
+     *
      * @param text
      * @return
      */
@@ -102,6 +106,7 @@ public class CustomItemStack extends ItemStack {
 
     /**
      * Gets the lore of the itemstack at a specific index
+     *
      * @param index
      * @return
      */
@@ -112,6 +117,7 @@ public class CustomItemStack extends ItemStack {
 
     /**
      * Adds lore to a CustomItemStack
+     *
      * @param text
      * @return
      */
@@ -144,6 +150,7 @@ public class CustomItemStack extends ItemStack {
 
     /**
      * Adds lore to a CustomItemStack
+     *
      * @param text
      * @return
      */
@@ -168,10 +175,10 @@ public class CustomItemStack extends ItemStack {
 
     /**
      * Applies a glow effect to the item
+     *
      * @return
      */
-    public CustomItemStack glow()
-    {
+    public CustomItemStack glow() {
         enchant(Enchantment.ARROW_FIRE, 1);
         addFlag(ItemFlag.HIDE_ENCHANTS);
         return this;
@@ -184,6 +191,7 @@ public class CustomItemStack extends ItemStack {
 
     /**
      * Adds an itemflag to the itemstack
+     *
      * @param flag
      * @return
      */
@@ -196,6 +204,7 @@ public class CustomItemStack extends ItemStack {
 
     /**
      * Enchants the itemstack with an enchantment at a certain level
+     *
      * @param enchantment
      * @param level
      * @return
@@ -209,6 +218,7 @@ public class CustomItemStack extends ItemStack {
 
     /**
      * Sets the durability/damage of an itemstack
+     *
      * @param damage
      * @return
      */
@@ -219,6 +229,7 @@ public class CustomItemStack extends ItemStack {
 
     /**
      * Strips the lore of an itemstack
+     *
      * @return
      */
     public CustomItemStack stripLore() {
@@ -230,6 +241,7 @@ public class CustomItemStack extends ItemStack {
 
     /**
      * Removes the lore of the itemstack at a specific index
+     *
      * @param index
      * @return
      */
@@ -244,6 +256,7 @@ public class CustomItemStack extends ItemStack {
 
     /**
      * Sets the amount of the itemstack
+     *
      * @param amount
      * @return
      */
@@ -253,10 +266,9 @@ public class CustomItemStack extends ItemStack {
     }
 
 
-
-
     /**
      * Retrieves the displayname of the CustomItemStack
+     *
      * @return
      */
     public String getDisplayName() {
@@ -282,15 +294,6 @@ public class CustomItemStack extends ItemStack {
     public boolean hasMeta(String key) {
         return ItemMetaData.hasMetadata(this, key);
     }
-
-
-
-
-
-
-
-
-
 
 
 }

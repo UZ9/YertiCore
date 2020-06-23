@@ -16,6 +16,7 @@ public @interface SubCommand {
      * REQUIRED
      * Name of the parent command
      * ex. for /fly 'fly' would be the parent for the subcommand
+     *
      * @return
      */
     String parent();
@@ -24,6 +25,7 @@ public @interface SubCommand {
      * REQUIRED
      * Name of a command
      * Ex. /fly would have the name of 'fly'
+     *
      * @return
      */
     String name();
@@ -32,6 +34,7 @@ public @interface SubCommand {
      * OPTIONAL
      * Permission required to issue the command
      * Leave blank for no permission
+     *
      * @return
      */
     String permission();
@@ -40,6 +43,7 @@ public @interface SubCommand {
      * OPTIONAL, HIGHLY RECOMMENDED
      * Usage for command
      * Leave blank for no usage
+     *
      * @return
      */
     String usage();
@@ -48,6 +52,7 @@ public @interface SubCommand {
      * OPTIONAL
      * Description for command
      * Leave blank for no description
+     *
      * @return
      */
     String description();

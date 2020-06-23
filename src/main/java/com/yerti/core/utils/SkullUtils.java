@@ -19,7 +19,6 @@ public class SkullUtils {
      *
      * @param name The Player's name
      * @return The head of the Player
-     *
      * @deprecated names don't make for good identifiers
      */
     @Deprecated
@@ -35,7 +34,6 @@ public class SkullUtils {
      * @param item The item to apply the name to
      * @param name The Player's name
      * @return The head of the Player
-     *
      * @deprecated names don't make for good identifiers
      */
     @Deprecated
@@ -47,7 +45,6 @@ public class SkullUtils {
                 "{SkullOwner:\"" + name + "\"}"
         );
     }
-
 
 
     /**
@@ -67,7 +64,7 @@ public class SkullUtils {
      * Creates a player skull based on a Mojang server URL.
      *
      * @param item The item to apply the skin to
-     * @param url The URL of the Mojang skin
+     * @param url  The URL of the Mojang skin
      * @return The head associated with the URL
      */
     public static ItemStack itemWithUrl(ItemStack item, String url) {
@@ -91,7 +88,7 @@ public class SkullUtils {
     /**
      * Applies the base64 string to the ItemStack.
      *
-     * @param item The ItemStack to put the base64 onto
+     * @param item   The ItemStack to put the base64 onto
      * @param base64 The base64 string containing the texture
      * @return The head with a custom texture
      */
@@ -110,7 +107,7 @@ public class SkullUtils {
      * Sets the block to a skull with the given UUID.
      *
      * @param block The block to set
-     * @param url The mojang URL to set it to use
+     * @param url   The mojang URL to set it to use
      */
     public static void blockWithUrl(Block block, String url) {
         notNull(block, "block");
@@ -122,7 +119,7 @@ public class SkullUtils {
     /**
      * Sets the block to a skull with the given UUID.
      *
-     * @param block The block to set
+     * @param block  The block to set
      * @param base64 The base64 to set it to use
      */
     public static void blockWithBase64(Block block, String base64) {
@@ -142,7 +139,7 @@ public class SkullUtils {
         if (newerApi()) {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "data merge block " + args);
         } else {
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(),"blockdata " + args);
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "blockdata " + args);
         }
     }
 

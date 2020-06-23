@@ -21,7 +21,6 @@ public class ItemStackUtils {
     private static Gson gson = new GsonBuilder().create();
 
 
-
     /**
      * @return the smelted {@link ItemStack} variant of the {@param itemStack}
      */
@@ -122,7 +121,6 @@ public class ItemStackUtils {
         json.addProperty("durability", item.getDurability());
 
 
-
         if (item.getEnchantments().size() > 0) {
             final JsonObject enchantments = new JsonObject();
             for (final Map.Entry<Enchantment, Integer> entry : item.getEnchantments().entrySet()) {
@@ -161,12 +159,12 @@ public class ItemStackUtils {
 
     public static ItemStack deserializeItemStack(final String string) {
         try {
-            final JsonObject json = (JsonObject)parser.parse(string);
+            final JsonObject json = (JsonObject) parser.parse(string);
             final Material type = Material.getMaterial(json.get("type").getAsString());
             final byte data = json.get("data").getAsByte();
             final int amount = json.get("amount").getAsInt();
             final short durability = json.get("durability").getAsShort();
-            final ItemStack item = new ItemStack(type, amount, (short)data);
+            final ItemStack item = new ItemStack(type, amount, data);
             item.setDurability(durability);
             if (json.has("enchantments")) {
                 final JsonObject enchantments = json.getAsJsonObject("enchantments");
@@ -198,13 +196,10 @@ public class ItemStackUtils {
                 }
 
 
-
-
                 item.setItemMeta(meta);
             }
             return item;
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             return null;
         }
     }

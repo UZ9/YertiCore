@@ -1,7 +1,6 @@
 package com.yerti.core.cooldown;
 
 
-
 import com.yerti.core.YertiPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;

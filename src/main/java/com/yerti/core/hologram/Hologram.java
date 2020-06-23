@@ -22,7 +22,8 @@ public class Hologram {
 
     public ArmorStand getArmorStand(Location loc, boolean create) {
         for (Entity entity : loc.getChunk().getEntities()) {
-            if (entity instanceof ArmorStand && entity.getCustomName() != null && entity.getLocation().distanceSquared(loc) < 0.4D) return (ArmorStand) entity;
+            if (entity instanceof ArmorStand && entity.getCustomName() != null && entity.getLocation().distanceSquared(loc) < 0.4D)
+                return (ArmorStand) entity;
         }
         if (!create) return null;
         return create(loc);
@@ -39,7 +40,6 @@ public class Hologram {
         stand.setRemoveWhenFarAway(false);
         return stand;
     }
-
 
 
 }

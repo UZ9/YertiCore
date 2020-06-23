@@ -10,6 +10,7 @@ public class EntityPhysics {
 
     /**
      * Launches a block with a custom velocity
+     *
      * @param blockLoc
      * @param velocity
      */

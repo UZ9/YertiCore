@@ -15,7 +15,7 @@ public class ChatUtils {
     }
 
     public static String translateWithoutPrefix(String message) {
-        return ChatColor.translateAlternateColorCodes('&',  message);
+        return ChatColor.translateAlternateColorCodes('&', message);
     }
 
 }

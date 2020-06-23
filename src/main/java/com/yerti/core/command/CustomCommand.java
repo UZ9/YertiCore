@@ -22,6 +22,7 @@ public @interface CustomCommand {
      * REQUIRED
      * Name of a command
      * Ex. /fly would have the name of 'fly'
+     *
      * @return
      */
     String name();
@@ -30,6 +31,7 @@ public @interface CustomCommand {
      * OPTIONAL
      * Permission required to issue the command
      * Leave blank for no permission
+     *
      * @return
      */
     String permission();
@@ -38,6 +40,7 @@ public @interface CustomCommand {
      * OPTIONAL
      * Aliases for command
      * Leave blank for no aliases
+     *
      * @return
      */
     String[] aliases();
@@ -46,6 +49,7 @@ public @interface CustomCommand {
      * OPTIONAL
      * Description for command
      * Leave blank for no description
+     *
      * @return
      */
     String description();
@@ -54,6 +58,7 @@ public @interface CustomCommand {
      * OPTIONAL, HIGHLY RECOMMENDED
      * Usage for command
      * Leave blank for no usage
+     *
      * @return
      */
     String usage();

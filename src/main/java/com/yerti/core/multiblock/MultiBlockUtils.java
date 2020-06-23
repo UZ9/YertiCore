@@ -13,7 +13,7 @@ public class MultiBlockUtils {
 
         Material[][][] matrix = pattern.build();
 
-        for (int x = 0; x <xSize; x++) {
+        for (int x = 0; x < xSize; x++) {
             for (int y = 0; y < ySize; y++) {
                 for (int z = 0; z < zSize; z++) {
                     //new Location(loc.getWorld(), x + loc.getX(), y + loc.getY(), z + loc.getZ()).getBlock().setType(matrix[x][y][z]);

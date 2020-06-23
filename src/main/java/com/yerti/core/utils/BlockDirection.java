@@ -5,7 +5,7 @@ import org.bukkit.block.BlockFace;
 
 public enum BlockDirection {
 
-    EAST(BlockFace.EAST),WEST(BlockFace.WEST),NORTH(BlockFace.SOUTH),SOUTH(BlockFace.NORTH);
+    EAST(BlockFace.EAST), WEST(BlockFace.WEST), NORTH(BlockFace.SOUTH), SOUTH(BlockFace.NORTH);
 
     private BlockFace face;
 

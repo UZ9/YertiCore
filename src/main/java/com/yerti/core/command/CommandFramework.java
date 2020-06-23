@@ -30,16 +30,13 @@ public class CommandFramework implements CommandExecutor {
         registerCommands();
 
 
-
-
-
     }
 
     public void registerCommands() {
         final Map<String, BukkitCommand> commandMap = new HashMap<>();
 
         //for (Method method : clazz.getMethods()) {
-        for (Method method  : commandClass.getMethods()) {
+        for (Method method : commandClass.getMethods()) {
             Object object = null;
             String name = commandClass.getName();
             try {
@@ -87,25 +84,25 @@ public class CommandFramework implements CommandExecutor {
                 if (parameterType[0] != CommandSender.class || parameterType[1] != Command.class || parameterType[2] != String[].class) {
                     Bukkit.getLogger().log(Level.SEVERE, "Unable to register subcommand " + method.getName() + ".");
                 }
-                SubCommand subCommand = method.getAnnotation(SubCommand.class);
-                BukkitCommand parent = commandMap.get(subCommand.parent());
-                if (parent == null) {
+            SubCommand subCommand = method.getAnnotation(SubCommand.class);
+            BukkitCommand parent = commandMap.get(subCommand.parent());
+            if (parent == null) {
 
-                    Bukkit.getLogger().log(Level.SEVERE, "Unable to register subcommand " + method.getName() + " because the parent " + subCommand.parent() + " was null.");
-                    continue;
-                }
+                Bukkit.getLogger().log(Level.SEVERE, "Unable to register subcommand " + method.getName() + " because the parent " + subCommand.parent() + " was null.");
+                continue;
+            }
 
-                BukkitCommand command = new BukkitCommand(
-                  subCommand.name(),
-                  subCommand.permission(),
-                  subCommand.usage(),
-                  subCommand.description(),
-                  new String[0],
-                  method,
-                  object
-                );
+            BukkitCommand command = new BukkitCommand(
+                    subCommand.name(),
+                    subCommand.permission(),
+                    subCommand.usage(),
+                    subCommand.description(),
+                    new String[0],
+                    method,
+                    object
+            );
 
-                parent.addSubCommand(command);
+            parent.addSubCommand(command);
 
 
         }
@@ -130,7 +127,6 @@ public class CommandFramework implements CommandExecutor {
 
                 //TODO: Only Player
                 //if (!customCommand.)
-
 
 
                 if (bukkitCommand.getSubCommands().isEmpty() || strings.length == 0) {
@@ -176,8 +172,6 @@ public class CommandFramework implements CommandExecutor {
                     }
                 }
             }
-
-
 
 
         }

@@ -17,12 +17,12 @@ public class ActionBar {
     }
 
     public void sendToPlayer(Player p) {
-        ((CraftPlayer)p).getHandle().playerConnection.sendPacket(packet);
+        ((CraftPlayer) p).getHandle().playerConnection.sendPacket(packet);
     }
 
     public void sendToAll() {
         for (Player p : Bukkit.getServer().getOnlinePlayers()) {
-            ((CraftPlayer)p).getHandle().playerConnection.sendPacket(packet);
+            ((CraftPlayer) p).getHandle().playerConnection.sendPacket(packet);
         }
     }
 

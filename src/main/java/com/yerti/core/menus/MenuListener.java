@@ -19,6 +19,7 @@ public class MenuListener implements Listener {
 
     /**
      * Creates a MenuListener off of a list of {@link Page}s
+     *
      * @param menus
      */
     public MenuListener(List<Page> menus) {
@@ -29,6 +30,7 @@ public class MenuListener implements Listener {
 
     /**
      * Checks for any specific {@link MenuItem}s and their designated events
+     *
      * @param event
      */
     @EventHandler
@@ -48,7 +50,6 @@ public class MenuListener implements Listener {
                 menuItem.onClick(event);
             }
         });
-
 
 
     }

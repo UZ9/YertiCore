@@ -11,7 +11,6 @@ import java.util.Map;
 public class CustomRecipeHandler implements Listener {
 
 
-
     @EventHandler
     public void onPrepareCraft(PrepareItemCraftEvent event) {
 
@@ -31,9 +30,6 @@ public class CustomRecipeHandler implements Listener {
                             return;
                         }
                     }
-
-
-
 
 
                     if (!inventory.getMatrix()[i].getItemMeta().equals(entry.getValue()[i].getItemMeta())) {

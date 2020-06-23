@@ -2,6 +2,7 @@ package com.yerti.core.menus;
 
 /**
  * Enum for the different sizes in a menu
+ *
  * @see Page
  */
 public enum Size {

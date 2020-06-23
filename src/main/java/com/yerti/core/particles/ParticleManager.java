@@ -13,8 +13,8 @@ import org.bukkit.util.Vector;
 
 public class ParticleManager {
 
-    public static void sendColorParticle(Location location,  int r, int g, int b) {
-        PacketPlayOutWorldParticles particles = new PacketPlayOutWorldParticles(EnumParticle.FLAME, true, (float) location.getX(), (float) location.getY(), (float) location.getZ(), r, g, b, (float) 255,0, 10);
+    public static void sendColorParticle(Location location, int r, int g, int b) {
+        PacketPlayOutWorldParticles particles = new PacketPlayOutWorldParticles(EnumParticle.FLAME, true, (float) location.getX(), (float) location.getY(), (float) location.getZ(), r, g, b, (float) 255, 0, 10);
 
         for (Player player : Bukkit.getOnlinePlayers()) {
             ((CraftPlayer) player).getHandle().playerConnection.sendPacket(particles);
@@ -37,7 +37,7 @@ public class ParticleManager {
         int covered = 0;
 
         for (; covered < distance; v1.add(vector)) {
-            PacketPlayOutWorldParticles particles = new PacketPlayOutWorldParticles(EnumParticle.FLAME, true, (float) v1.getX(), (float) v1.getY(), (float) v1.getZ(), r, g, b, (float) 255,0, 10);
+            PacketPlayOutWorldParticles particles = new PacketPlayOutWorldParticles(EnumParticle.FLAME, true, (float) v1.getX(), (float) v1.getY(), (float) v1.getZ(), r, g, b, (float) 255, 0, 10);
 
             for (Player player : Bukkit.getOnlinePlayers()) {
                 ((CraftPlayer) player).getHandle().playerConnection.sendPacket(particles);
@@ -46,10 +46,8 @@ public class ParticleManager {
             covered += 2;
 
 
-
         }
     }
-
 
 
 }

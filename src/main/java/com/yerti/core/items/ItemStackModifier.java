@@ -12,6 +12,7 @@ public class ItemStackModifier {
 
     /**
      * Creates an ItemStackModifier
+     *
      * @param stack
      */
     public ItemStackModifier(ItemStack stack) {
@@ -20,6 +21,7 @@ public class ItemStackModifier {
 
     /**
      * Sets the display name of an ItemStack
+     *
      * @param displayName
      * @return
      */

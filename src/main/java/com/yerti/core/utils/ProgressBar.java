@@ -26,7 +26,7 @@ public class ProgressBar {
 
         StringBuilder builder = new StringBuilder();
 
-        for (int i = 1 ; i <= barAmount; i++) {
+        for (int i = 1; i <= barAmount; i++) {
             if (i <= bars) {
                 builder.append(filled).append(symbol);
             } else {
@@ -35,7 +35,6 @@ public class ProgressBar {
         }
 
         return builder.toString();
-
 
 
     }

@@ -14,7 +14,6 @@ public class CustomRecipe {
     private static Map<ItemStack, ItemStack[]> matrixMap = new HashMap<>();
 
 
-
     public CustomRecipe(ItemStack output) {
         recipe = new ShapedRecipe(output);
     }

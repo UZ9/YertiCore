@@ -15,11 +15,10 @@ public class CustomEntity {
     private LivingEntity entity;
 
     /**
-     *
-     * @param entity a living entity
-     * @param armor the armor to put on (leave null if no armor)
-     * @param hand item to be held in hand (leave null if nothing in hand)
-     * @param health health for the mob (up to 1024)
+     * @param entity  a living entity
+     * @param armor   the armor to put on (leave null if no armor)
+     * @param hand    item to be held in hand (leave null if nothing in hand)
+     * @param health  health for the mob (up to 1024)
      * @param effects potion effects for the mob (leave null if nothing)
      */
     public CustomEntity(LivingEntity entity, @Nullable ItemStack[] armor, @Nullable ItemStack hand, int health, @Nullable PotionEffect[] effects) {

@@ -19,6 +19,7 @@ public class BlockUtils {
 
     /**
      * Breaks a block as if it was from a player
+     *
      * @param p the target player
      * @param b the target block
      */
@@ -51,30 +52,22 @@ public class BlockUtils {
         chunk.a(bp, ibd);
     }
 
-    public static List<Location> getBlocks(Location l, int radius)
-    {
+    public static List<Location> getBlocks(Location l, int radius) {
         World w = l.getWorld();
         int xCoord = (int) l.getX();
         int zCoord = (int) l.getZ();
         int YCoord = (int) l.getY();
 
         List<Location> tempList = new ArrayList<>();
-        for (int x = -radius; x <= radius; x++)
-        {
-            for (int z = -radius; z <= radius; z++)
-            {
-                for (int y = -radius; y <= radius; y++)
-                {
+        for (int x = -radius; x <= radius; x++) {
+            for (int z = -radius; z <= radius; z++) {
+                for (int y = -radius; y <= radius; y++) {
                     tempList.add(new Location(w, xCoord + x, YCoord + y, zCoord + z));
                 }
             }
         }
         return tempList;
     }
-
-
-
-
 
 
 }

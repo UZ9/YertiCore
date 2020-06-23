@@ -189,7 +189,6 @@ public final class XBlock {
     }
 
 
-
     private static boolean isMaterial(Block block, String... materials) {
         String type = block.getType().name();
         for (String material : materials)

@@ -20,7 +20,7 @@ public class MultiBlockPattern {
     //[0][1] 333
     //[0][2] 333
 
-    public  MultiBlockPattern(String[][] pattern) {
+    public MultiBlockPattern(String[][] pattern) {
         this.pattern = pattern;
     }
 
@@ -48,9 +48,6 @@ public class MultiBlockPattern {
 
 
     }
-
-
-
 
 
 }
