@@ -1,7 +1,7 @@
 package com.yerti.core.utils;
 
 
-import com.yerti.banditgames.core.items.CustomItemStack;
+import com.yerti.core.items.CustomItemStack;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;

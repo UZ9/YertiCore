@@ -1,6 +1,7 @@
 package com.yerti.core.utils;
 
-import com.yerti.banditgames.core.YertiPlugin;
+
+import com.yerti.core.YertiPlugin;
 import org.bukkit.Bukkit;
 
 public class Animation {

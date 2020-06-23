@@ -1,7 +1,7 @@
 package com.yerti.core.hologram;
 
 
-import com.yerti.banditgames.core.utils.ChatUtils;
+import com.yerti.core.utils.ChatUtils;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.ArmorStand;

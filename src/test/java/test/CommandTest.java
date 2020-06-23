@@ -1,4 +1,4 @@
-package com.yerti.test;
+package test;
 
 import com.yerti.core.YertiPlugin;
 import com.yerti.core.command.CustomCommand;
@@ -17,7 +17,6 @@ public class CommandTest extends YertiPlugin {
     @Override
     public void onEnable() {
 
-        load(CommandTest.class);
     }
 
     /**

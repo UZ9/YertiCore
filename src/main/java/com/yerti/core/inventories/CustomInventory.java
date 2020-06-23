@@ -1,8 +1,9 @@
 package com.yerti.core.inventories;
 
 
-import com.yerti.banditgames.core.menus.MenuItem;
-import com.yerti.banditgames.core.utils.ChatUtils;
+import com.yerti.core.menus.MenuItem;
+import com.yerti.core.menus.Page;
+import com.yerti.core.utils.ChatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -15,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Similar Inventory system to {@link com.yerti.banditgames.core.menus.Page} without using keys
+ * Similar Inventory system to {@link Page} without using keys
  */
 public class CustomInventory implements InventoryHolder {
 

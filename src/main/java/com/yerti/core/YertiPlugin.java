@@ -30,15 +30,6 @@ public class YertiPlugin extends JavaPlugin {
 
     }
 
-    /**
-     * Loads needed resources
-     */
-    protected void load() {
-
-
-    }
-
-
     public static Plugin getHookedPlugin() {
         return hookedPlugin;
     }

@@ -1,7 +1,7 @@
 package com.yerti.core.utils;
 
 
-import com.yerti.banditgames.core.YertiPlugin;
+import com.yerti.core.YertiPlugin;
 
 public class NMSUtils {
     public static Class<?> getNMSClass(String name) {

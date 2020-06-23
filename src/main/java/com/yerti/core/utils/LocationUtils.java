@@ -1,6 +1,7 @@
 package com.yerti.core.utils;
 
-import com.yerti.banditgames.core.config.Config;
+
+import com.yerti.core.config.Config;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 

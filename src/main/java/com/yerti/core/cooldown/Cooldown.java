@@ -1,7 +1,8 @@
 package com.yerti.core.cooldown;
 
 
-import com.yerti.banditgames.core.YertiPlugin;
+
+import com.yerti.core.YertiPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitTask;
 
