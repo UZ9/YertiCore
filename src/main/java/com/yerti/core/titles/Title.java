@@ -15,6 +15,7 @@ import java.util.Map;
  * http://git.mvdw-software.com/plugins/titlemotd/blob/db46e305e57c318a5cc063a531e3960a8d5a19a5/src/be/maximvdw/titlemotd/ui/Title.java
  */
 public class Title {
+    private static final Map<Class<?>, Class<?>> CORRESPONDING_TYPES = new HashMap<Class<?>, Class<?>>();
     /* Title packet */
     private static Class<?> packetTitle;
     /* Title packet actions ENUM */
@@ -33,8 +34,6 @@ public class Title {
     private int stayTime = -1;
     private int fadeOutTime = -1;
     private boolean ticks = false;
-
-    private static final Map<Class<?>, Class<?>> CORRESPONDING_TYPES = new HashMap<Class<?>, Class<?>>();
 
     public Title() {
         loadClasses();
@@ -99,6 +98,15 @@ public class Title {
         loadClasses();
     }
 
+    private static boolean equalsTypeArray(Class<?>[] a, Class<?>[] o) {
+        if (a.length != o.length)
+            return false;
+        for (int i = 0; i < a.length; i++)
+            if (!a[i].equals(o[i]) && !a[i].isAssignableFrom(o[i]))
+                return false;
+        return true;
+    }
+
     /**
      * Load spigot and NMS classes
      */
@@ -112,15 +120,6 @@ public class Title {
     }
 
     /**
-     * Set title text
-     *
-     * @param title Title
-     */
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    /**
      * Get title text
      *
      * @return Title text
@@ -130,12 +129,12 @@ public class Title {
     }
 
     /**
-     * Set subtitle text
+     * Set title text
      *
-     * @param subtitle Subtitle text
+     * @param title Title
      */
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     /**
@@ -148,48 +147,12 @@ public class Title {
     }
 
     /**
-     * Set the title color
+     * Set subtitle text
      *
-     * @param color Chat color
+     * @param subtitle Subtitle text
      */
-    public void setTitleColor(ChatColor color) {
-        this.titleColor = color;
-    }
-
-    /**
-     * Set the subtitle color
-     *
-     * @param color Chat color
-     */
-    public void setSubtitleColor(ChatColor color) {
-        this.subtitleColor = color;
-    }
-
-    /**
-     * Set title fade in time
-     *
-     * @param time Time
-     */
-    public void setFadeInTime(int time) {
-        this.fadeInTime = time;
-    }
-
-    /**
-     * Set title fade out time
-     *
-     * @param time Time
-     */
-    public void setFadeOutTime(int time) {
-        this.fadeOutTime = time;
-    }
-
-    /**
-     * Set title stay time
-     *
-     * @param time Time
-     */
-    public void setStayTime(int time) {
-        this.stayTime = time;
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
     }
 
     /**
@@ -404,15 +367,6 @@ public class Title {
         return types;
     }
 
-    private static boolean equalsTypeArray(Class<?>[] a, Class<?>[] o) {
-        if (a.length != o.length)
-            return false;
-        for (int i = 0; i < a.length; i++)
-            if (!a[i].equals(o[i]) && !a[i].isAssignableFrom(o[i]))
-                return false;
-        return true;
-    }
-
     private Object getHandle(Object obj) {
         try {
             return getMethod("getHandle", obj.getClass()).invoke(obj);
@@ -487,20 +441,65 @@ public class Title {
         return titleColor;
     }
 
+    /**
+     * Set the title color
+     *
+     * @param color Chat color
+     */
+    public void setTitleColor(ChatColor color) {
+        this.titleColor = color;
+    }
+
     public ChatColor getSubtitleColor() {
         return subtitleColor;
+    }
+
+    /**
+     * Set the subtitle color
+     *
+     * @param color Chat color
+     */
+    public void setSubtitleColor(ChatColor color) {
+        this.subtitleColor = color;
     }
 
     public int getFadeInTime() {
         return fadeInTime;
     }
 
+    /**
+     * Set title fade in time
+     *
+     * @param time Time
+     */
+    public void setFadeInTime(int time) {
+        this.fadeInTime = time;
+    }
+
     public int getFadeOutTime() {
         return fadeOutTime;
     }
 
+    /**
+     * Set title fade out time
+     *
+     * @param time Time
+     */
+    public void setFadeOutTime(int time) {
+        this.fadeOutTime = time;
+    }
+
     public int getStayTime() {
         return stayTime;
+    }
+
+    /**
+     * Set title stay time
+     *
+     * @param time Time
+     */
+    public void setStayTime(int time) {
+        this.stayTime = time;
     }
 
     public boolean isTicks() {

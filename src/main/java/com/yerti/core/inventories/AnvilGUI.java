@@ -33,10 +33,6 @@ public class AnvilGUI {
      */
     private final Player player;
     /**
-     * The text that will be displayed to the user
-     */
-    private String text;
-    /**
      * A state that decides where the anvil GUI is able to be closed by the user
      */
     private final boolean preventClose;
@@ -48,7 +44,14 @@ public class AnvilGUI {
      * An {@link BiFunction} that is called when the {@link Slot#OUTPUT} slot has been clicked
      */
     private final BiFunction<Player, String, Response> completeFunction;
-
+    /**
+     * The listener holder class
+     */
+    private final ListenUp listener = new ListenUp();
+    /**
+     * The text that will be displayed to the user
+     */
+    private String text;
     /**
      * The ItemStack that is in the {@link Slot#INPUT_LEFT} slot.
      */
@@ -61,11 +64,6 @@ public class AnvilGUI {
      * The inventory that is used on the Bukkit side of things
      */
     private Inventory inventory;
-    /**
-     * The listener holder class
-     */
-    private final ListenUp listener = new ListenUp();
-
     /**
      * Represents the state of the inventory being open
      */
@@ -177,43 +175,8 @@ public class AnvilGUI {
         return inventory;
     }
 
-    /**
-     * Simply holds the listeners for the GUI
-     */
-    private class ListenUp implements Listener {
-
-        @EventHandler
-        public void onInventoryClick(InventoryClickEvent event) {
-            if (event.getInventory().equals(inventory) && event.getRawSlot() < 3) {
-                event.setCancelled(true);
-                final Player clicker = (Player) event.getWhoClicked();
-                if (event.getRawSlot() == Slot.OUTPUT) {
-                    final ItemStack clicked = inventory.getItem(Slot.OUTPUT);
-                    if (clicked == null || clicked.getType() == Material.AIR) return;
-
-                    final Response response = completeFunction.apply(clicker, clicked.hasItemMeta() ? clicked.getItemMeta().getDisplayName() : "");
-                    if (response.getText() != null) {
-                        final ItemMeta meta = clicked.getItemMeta();
-                        meta.setDisplayName(response.getText());
-                        clicked.setItemMeta(meta);
-                        inventory.setItem(Slot.INPUT_LEFT, clicked);
-                    } else {
-                        closeInventory();
-                    }
-                }
-            }
-        }
-
-        @EventHandler
-        public void onInventoryClose(InventoryCloseEvent event) {
-            if (open && event.getInventory().equals(inventory)) {
-                closeInventory();
-                if (preventClose) {
-                    Bukkit.getScheduler().runTask(plugin, AnvilGUI.this::openInventory);
-                }
-            }
-        }
-
+    private EntityPlayer toNMS(Player player) {
+        return ((CraftPlayer) player).getHandle();
     }
 
     /**
@@ -340,15 +303,6 @@ public class AnvilGUI {
         }
 
         /**
-         * Gets the text that is to be displayed to the user
-         *
-         * @return The text that is to be displayed to the user
-         */
-        public String getText() {
-            return text;
-        }
-
-        /**
          * Returns an {@link Response} object for when the anvil GUI is to close
          *
          * @return An {@link Response} object for when the anvil GUI is to close
@@ -365,6 +319,15 @@ public class AnvilGUI {
          */
         public static Response text(String text) {
             return new Response(text);
+        }
+
+        /**
+         * Gets the text that is to be displayed to the user
+         *
+         * @return The text that is to be displayed to the user
+         */
+        public String getText() {
+            return text;
         }
 
     }
@@ -391,8 +354,43 @@ public class AnvilGUI {
 
     }
 
-    private EntityPlayer toNMS(Player player) {
-        return ((CraftPlayer) player).getHandle();
+    /**
+     * Simply holds the listeners for the GUI
+     */
+    private class ListenUp implements Listener {
+
+        @EventHandler
+        public void onInventoryClick(InventoryClickEvent event) {
+            if (event.getInventory().equals(inventory) && event.getRawSlot() < 3) {
+                event.setCancelled(true);
+                final Player clicker = (Player) event.getWhoClicked();
+                if (event.getRawSlot() == Slot.OUTPUT) {
+                    final ItemStack clicked = inventory.getItem(Slot.OUTPUT);
+                    if (clicked == null || clicked.getType() == Material.AIR) return;
+
+                    final Response response = completeFunction.apply(clicker, clicked.hasItemMeta() ? clicked.getItemMeta().getDisplayName() : "");
+                    if (response.getText() != null) {
+                        final ItemMeta meta = clicked.getItemMeta();
+                        meta.setDisplayName(response.getText());
+                        clicked.setItemMeta(meta);
+                        inventory.setItem(Slot.INPUT_LEFT, clicked);
+                    } else {
+                        closeInventory();
+                    }
+                }
+            }
+        }
+
+        @EventHandler
+        public void onInventoryClose(InventoryCloseEvent event) {
+            if (open && event.getInventory().equals(inventory)) {
+                closeInventory();
+                if (preventClose) {
+                    Bukkit.getScheduler().runTask(plugin, AnvilGUI.this::openInventory);
+                }
+            }
+        }
+
     }
 
     private class AnvilContainer extends ContainerAnvil {

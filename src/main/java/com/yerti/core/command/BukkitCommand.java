@@ -39,12 +39,12 @@ public class BukkitCommand {
         return name;
     }
 
-    public List<BukkitCommand> getSubCommands() {
-        return subCommands;
-    }
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<BukkitCommand> getSubCommands() {
+        return subCommands;
     }
 
     public String getPermission() {

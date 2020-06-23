@@ -20,6 +20,14 @@ public class YertiPlugin extends JavaPlugin {
 
     protected Class<?> commandClass;
 
+    public static Plugin getHookedPlugin() {
+        return hookedPlugin;
+    }
+
+    public static void addHookedPlugin(Plugin plugin) {
+        hookedPlugin = plugin;
+    }
+
     public void onEnable() {
         new CommandFramework(this, commandClass);
         getServer().getPluginManager().registerEvents(new ModelProtection(), this);
@@ -28,14 +36,6 @@ public class YertiPlugin extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new InventoryHandler(), this);
 
 
-    }
-
-    public static Plugin getHookedPlugin() {
-        return hookedPlugin;
-    }
-
-    public static void addHookedPlugin(Plugin plugin) {
-        hookedPlugin = plugin;
     }
 
     protected void setPrefix(String prefix) {

@@ -7,8 +7,8 @@ import java.sql.*;
 
 public class SQLiteManager {
 
-    private Connection connection;
     File file;
+    private Connection connection;
 
     public SQLiteManager(Plugin plugin, String database, String user, String pass) {
 
