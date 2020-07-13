@@ -1,4 +1,4 @@
-package com.yerti.core.database;
+package com.yerti.core.database.sql;
 
 import org.bukkit.plugin.Plugin;
 
