@@ -43,7 +43,7 @@ public class CustomInventory implements InventoryHolder {
 
     public CustomInventory(InventoryType type, String displayName) {
         this.slots = type.getDefaultSize();
-        this.displayName = ChatUtils.translate(displayName);
+        this.displayName = ChatUtils.style(displayName);
         this.holder = this;
 
         this.inventory = Bukkit.createInventory(this, type, displayName);
@@ -66,14 +66,7 @@ public class CustomInventory implements InventoryHolder {
         }
     }
 
-    public void setItem(int index, ItemStack stack) {
-        getInventory().setItem(index, stack);
-    }
 
-    public void setItem(int index, MenuItem item) {
-        items.put(index, item);
-        getInventory().setItem(index, item);
-    }
 
     public ItemStack getItem(int index) {
         return getInventory().getItem(index);
@@ -117,6 +110,15 @@ public class CustomInventory implements InventoryHolder {
     }
 
     /**
+     * Gets the items with events
+     *
+     * @return
+     */
+    public Map<Integer, MenuItem> getItems() {
+        return items;
+    }
+
+    /**
      * Sets the display name for the inventory
      *
      * @param displayName
@@ -125,18 +127,20 @@ public class CustomInventory implements InventoryHolder {
         this.displayName = displayName;
     }
 
+    public void setItem(int index, ItemStack stack) {
+        getInventory().setItem(index, stack);
+    }
+
+    public void setItem(int index, MenuItem item) {
+        items.put(index, item);
+        getInventory().setItem(index, item);
+    }
+
     public void addItem(ItemStack... item) {
         inventory.addItem(item);
     }
 
-    /**
-     * Gets the items with events
-     *
-     * @return
-     */
-    public Map<Integer, MenuItem> getItems() {
-        return items;
-    }
+
 
     public boolean cancelsEvent() {
         return cancelEvent;
