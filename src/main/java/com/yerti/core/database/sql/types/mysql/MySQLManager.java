@@ -18,7 +18,6 @@ public class MySQLManager extends SQLManager {
 
         this.info = info;
 
-
         String mysqlDB = info.getDatabase();
         String mysqlUser = info.getUser();
         String mysqlPW = info.getPass();

@@ -17,7 +17,7 @@ import java.sql.ResultSet;
 /**
  * Example of a command using the YertiCore {@link com.yerti.core.command.CustomCommand} annotations
  */
-public class CommandTest extends YertiPlugin {
+public class FeatureTest extends YertiPlugin {
 
     /**
      * Normal override (JavaPlugin)
