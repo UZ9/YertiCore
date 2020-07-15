@@ -1,7 +1,7 @@
 package com.yerti.core.utils;
 
 
-import com.yerti.core.items.CustomItemStack;
+import com.yerti.core.items.ItemStackBuilder;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -116,7 +116,7 @@ public class InventoryUtils {
         for (ItemStack stack : inventory.getContents()) {
             if (stack == null || stack.getType() == Material.AIR) continue;
 
-            if (new CustomItemStack(stack).isSimilar(item)) {
+            if (new ItemStackBuilder(stack).isSimilar(item)) {
                 amount += stack.getAmount();
             }
         }
@@ -143,7 +143,7 @@ public class InventoryUtils {
             if (invStack == null) continue;
             if (amount == 0) return 1;
 
-            if (new CustomItemStack(stack).isSimilar(invStack)) {
+            if (new ItemStackBuilder(stack).isSimilar(invStack)) {
                 if (invStack.getAmount() <= amount) {
                     inventory.remove(invStack);
                     amount -= invStack.getAmount();

@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Creates a CustomItemStack for ease of access
  */
-public class CustomItemStack extends ItemStack {
+public class ItemStackBuilder extends ItemStack {
 
     Material type;
     int amount;
@@ -25,7 +25,7 @@ public class CustomItemStack extends ItemStack {
      * @param type
      * @param amount
      */
-    public CustomItemStack(Material type, int amount) {
+    public ItemStackBuilder(Material type, int amount) {
         this(type, amount, null, false);
     }
 
@@ -34,7 +34,7 @@ public class CustomItemStack extends ItemStack {
      *
      * @param stack
      */
-    public CustomItemStack(ItemStack stack) {
+    public ItemStackBuilder(ItemStack stack) {
         super(stack);
     }
 
@@ -47,7 +47,7 @@ public class CustomItemStack extends ItemStack {
      * @param glowing     Boolean for whether the item should be glowing
      * @param lore        Lore for the ItemStack
      */
-    public CustomItemStack(Material type, int amount, String displayName, boolean glowing, String... lore) {
+    public ItemStackBuilder(Material type, int amount, String displayName, boolean glowing, String... lore) {
         this(type, amount, displayName, glowing);
 
         ItemMeta meta = getItemMeta();
@@ -62,7 +62,7 @@ public class CustomItemStack extends ItemStack {
      * @param displayName Display name of the ItemStack
      * @param glowing     Boolean for whether the item should be glowing
      */
-    public CustomItemStack(Material type, int amount, String displayName, boolean glowing) {
+    public ItemStackBuilder(Material type, int amount, String displayName, boolean glowing) {
         super(type, amount);
 
 
@@ -97,7 +97,7 @@ public class CustomItemStack extends ItemStack {
      * @param text
      * @return
      */
-    public CustomItemStack name(String text) {
+    public ItemStackBuilder name(String text) {
         ItemMeta meta = getItemMeta();
         meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', text));
         setItemMeta(meta);
@@ -121,7 +121,7 @@ public class CustomItemStack extends ItemStack {
      * @param text
      * @return
      */
-    public CustomItemStack lore(String text) {
+    public ItemStackBuilder lore(String text) {
         ItemMeta meta = getItemMeta();
 
 
@@ -140,7 +140,7 @@ public class CustomItemStack extends ItemStack {
         return this;
     }
 
-    public CustomItemStack lore(String... text) {
+    public ItemStackBuilder lore(String... text) {
         for (String string : text) {
             lore(string);
         }
@@ -154,7 +154,7 @@ public class CustomItemStack extends ItemStack {
      * @param text
      * @return
      */
-    public CustomItemStack lore(int index, String text) {
+    public ItemStackBuilder lore(int index, String text) {
         ItemMeta meta = getItemMeta();
 
 
@@ -178,13 +178,13 @@ public class CustomItemStack extends ItemStack {
      *
      * @return
      */
-    public CustomItemStack glow() {
+    public ItemStackBuilder glow() {
         enchant(Enchantment.ARROW_FIRE, 1);
         addFlag(ItemFlag.HIDE_ENCHANTS);
         return this;
     }
 
-    public CustomItemStack setNBT(String key, Object value) {
+    public ItemStackBuilder setNBT(String key, Object value) {
         ItemMetaData.setMetadata(this, key, value);
         return this;
     }
@@ -195,7 +195,7 @@ public class CustomItemStack extends ItemStack {
      * @param flag
      * @return
      */
-    public CustomItemStack addFlag(ItemFlag flag) {
+    public ItemStackBuilder addFlag(ItemFlag flag) {
         ItemMeta meta = getItemMeta();
         meta.addItemFlags(flag);
         setItemMeta(meta);
@@ -209,7 +209,7 @@ public class CustomItemStack extends ItemStack {
      * @param level
      * @return
      */
-    public CustomItemStack enchant(Enchantment enchantment, int level) {
+    public ItemStackBuilder enchant(Enchantment enchantment, int level) {
         ItemMeta meta = getItemMeta();
         meta.addEnchant(enchantment, level, true);
         setItemMeta(meta);
@@ -222,7 +222,7 @@ public class CustomItemStack extends ItemStack {
      * @param damage
      * @return
      */
-    public CustomItemStack damage(int damage) {
+    public ItemStackBuilder damage(int damage) {
         setDurability((short) damage);
         return this;
     }
@@ -232,7 +232,7 @@ public class CustomItemStack extends ItemStack {
      *
      * @return
      */
-    public CustomItemStack stripLore() {
+    public ItemStackBuilder stripLore() {
         ItemMeta meta = getItemMeta();
         meta.setLore(new ArrayList<>());
         setItemMeta(meta);
@@ -245,7 +245,7 @@ public class CustomItemStack extends ItemStack {
      * @param index
      * @return
      */
-    public CustomItemStack removeLore(int index) {
+    public ItemStackBuilder removeLore(int index) {
         ItemMeta meta = getItemMeta();
         List<String> lore = meta.getLore();
         lore.remove(index);
@@ -260,7 +260,7 @@ public class CustomItemStack extends ItemStack {
      * @param amount
      * @return
      */
-    public CustomItemStack amount(int amount) {
+    public ItemStackBuilder amount(int amount) {
         this.setAmount(amount);
         return this;
     }
