@@ -6,6 +6,8 @@ import com.yerti.core.database.sql.types.mysql.MySQLInfo;
 import com.yerti.core.database.sql.types.mysql.MySQLManager;
 import com.yerti.core.database.sql.types.sqlite.SQLiteInfo;
 import com.yerti.core.database.sql.types.sqlite.SQLiteManager;
+import com.yerti.core.localization.Localization;
+import com.yerti.core.localization.LocalizationType;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -32,6 +34,13 @@ public class CommandTest extends YertiPlugin {
 
         ResultSet example = manager.query("SELECT * FROM exampleTable WHERE id = ?");
         ResultSet example2 = sqLiteManager.query("SELECT * FROM exampleTable where id = ?");
+
+        //Localization
+        Localization localization = new Localization(this, LocalizationType.EN_US);
+
+        String pickaxeName = localization.getValue("pickaxe.name");
+
+
     }
 
     /**
