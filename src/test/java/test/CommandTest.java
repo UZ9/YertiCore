@@ -2,9 +2,15 @@ package test;
 
 import com.yerti.core.YertiPlugin;
 import com.yerti.core.command.CustomCommand;
+import com.yerti.core.database.sql.types.mysql.MySQLInfo;
+import com.yerti.core.database.sql.types.mysql.MySQLManager;
+import com.yerti.core.database.sql.types.sqlite.SQLiteInfo;
+import com.yerti.core.database.sql.types.sqlite.SQLiteManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.sql.ResultSet;
 
 /**
  * Example of a command using the YertiCore {@link com.yerti.core.command.CustomCommand} annotations
@@ -16,7 +22,16 @@ public class CommandTest extends YertiPlugin {
      */
     @Override
     public void onEnable() {
+        MySQLManager manager = new MySQLManager(this,
+                new MySQLInfo("localhost", "25565", "exampledatabase", "user", "pass"),
+                true);
 
+        SQLiteManager sqLiteManager = new SQLiteManager(this,
+                new SQLiteInfo("db", "user", "pass"), false);
+
+
+        ResultSet example = manager.query("SELECT * FROM exampleTable WHERE id = ?");
+        ResultSet example2 = sqLiteManager.query("SELECT * FROM exampleTable where id = ?");
     }
 
     /**
