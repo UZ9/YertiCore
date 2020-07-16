@@ -33,18 +33,18 @@ public class CustomInventory implements InventoryHolder {
      * @param slots
      * @param displayName
      */
-    public CustomInventory(int slots, String displayName) {
+    public CustomInventory(InventoryHolder holder, int slots, String displayName) {
         this.slots = slots;
         this.displayName = ChatColor.translateAlternateColorCodes('&', displayName);
-        this.holder = this;
+        this.holder = holder == null ? this : holder;
 
         inventory = Bukkit.createInventory(this, slots, ChatColor.translateAlternateColorCodes('&', displayName));
     }
 
-    public CustomInventory(InventoryType type, String displayName) {
+    public CustomInventory(InventoryHolder holder, InventoryType type, String displayName) {
         this.slots = type.getDefaultSize();
         this.displayName = ChatUtils.style(displayName);
-        this.holder = this;
+        this.holder = holder == null ? this : holder;
 
         this.inventory = Bukkit.createInventory(this, type, displayName);
     }

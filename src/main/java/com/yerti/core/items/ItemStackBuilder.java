@@ -23,6 +23,13 @@ public class ItemStackBuilder extends ItemStack {
      * Creates a CustomItemStack off of parameters
      *
      * @param type
+     */
+    public ItemStackBuilder(Material type) { this(type, 1, null, false); }
+
+    /**
+     * Creates a CustomItemStack off of parameters
+     *
+     * @param type
      * @param amount
      */
     public ItemStackBuilder(Material type, int amount) {

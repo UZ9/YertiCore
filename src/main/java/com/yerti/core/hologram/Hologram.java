@@ -11,13 +11,13 @@ public class Hologram {
 
     public Hologram(Block block, String name) {
         ArmorStand stand = getArmorStand(block.getLocation().clone().add(.5, 2, .5), true);
-        stand.setCustomName(ChatUtils.translate(name));
+        stand.setCustomName(ChatUtils.style(name));
 
     }
 
     public Hologram(Location location, String name) {
         ArmorStand stand = getArmorStand(location, true);
-        stand.setCustomName(ChatUtils.translate(name));
+        stand.setCustomName(ChatUtils.style(name));
     }
 
     public ArmorStand getArmorStand(Location loc, boolean create) {

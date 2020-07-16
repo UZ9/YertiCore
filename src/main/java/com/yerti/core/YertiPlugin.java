@@ -29,21 +29,21 @@ public abstract class YertiPlugin extends JavaPlugin {
     }
 
     public final void onEnable() {
-        new CommandFramework(this, commandClass);
         getServer().getPluginManager().registerEvents(new ModelProtection(), this);
         getServer().getPluginManager().registerEvents(new CustomRecipeHandler(), this);
         getServer().getPluginManager().registerEvents(new EnchantmentHandler(), this);
         getServer().getPluginManager().registerEvents(new InventoryHandler(), this);
-        onPluginStart();
+        onPluginEnable();
+        new CommandFramework(this, commandClass);
     }
 
     public final void onDisable() {
-        onPluginEnd();
+        onPluginDisable();
     }
 
-    public abstract void onPluginStart();
+    public abstract void onPluginEnable();
 
-    public abstract void onPluginEnd();
+    public abstract void onPluginDisable();
 
     protected void setPrefix(String prefix) {
         ChatUtils.setPrefix(prefix);
