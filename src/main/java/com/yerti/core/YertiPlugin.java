@@ -14,7 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  * Class for loading any additional resources with only calling one method
  * Main class extends YertiPlugin (which then extends JavaPlugin
  */
-public class YertiPlugin extends JavaPlugin {
+public abstract class YertiPlugin extends JavaPlugin {
 
     private static Plugin hookedPlugin;
 
@@ -28,15 +28,22 @@ public class YertiPlugin extends JavaPlugin {
         hookedPlugin = plugin;
     }
 
-    public void onEnable() {
+    public final void onEnable() {
         new CommandFramework(this, commandClass);
         getServer().getPluginManager().registerEvents(new ModelProtection(), this);
         getServer().getPluginManager().registerEvents(new CustomRecipeHandler(), this);
         getServer().getPluginManager().registerEvents(new EnchantmentHandler(), this);
         getServer().getPluginManager().registerEvents(new InventoryHandler(), this);
-
-
+        onPluginStart();
     }
+
+    public final void onDisable() {
+        onPluginEnd();
+    }
+
+    public abstract void onPluginStart();
+
+    public abstract void onPluginEnd();
 
     protected void setPrefix(String prefix) {
         ChatUtils.setPrefix(prefix);
