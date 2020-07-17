@@ -1,4 +1,4 @@
-package com.yerti.core.block;
+package com.yerti.core.block.storage;
 
 import com.yerti.core.utils.LocationUtils;
 import com.yerti.core.utils.SerializationUtils;
@@ -13,28 +13,19 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PersistentBlockStorage {
+public class YMLPersistentBlockStorage extends PersistentBlockStorage {
 
     private FileConfiguration config;
-    private Map<Location, Map<String, Serializable>> data;
 
-    public PersistentBlockStorage(Plugin plugin, String fileName) {
+
+    public YMLPersistentBlockStorage(Plugin plugin, String fileName) {
         File file = new File(plugin.getDataFolder(), fileName);
         this.config = YamlConfiguration.loadConfiguration(file);
-        this.data = new HashMap<>();
 
         load();
     }
 
-    public void storeValue(Location location, String key, Serializable value) {
-        data.get(location).put(key, value);
-    }
-
-    public Object getValue(Location location, String key) {
-        return data.get(location).get(key);
-    }
-
-    private void load() {
+    public void load() {
         try {
             config.getConfigurationSection("data").getKeys(false).forEach(loc -> {
                 Location deserializedLoc = LocationUtils.deserializeLocation(loc);
@@ -48,7 +39,7 @@ public class PersistentBlockStorage {
                     }
                 });
 
-                data.put(deserializedLoc, mapToAdd);
+                getAllData().put(deserializedLoc, mapToAdd);
             });
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,7 +47,7 @@ public class PersistentBlockStorage {
     }
 
     public void save() {
-        data.forEach((key1, value1) -> {
+        getAllData().forEach((key1, value1) -> {
             String serializedLoc = LocationUtils.serializeLocation(key1);
 
             value1.forEach((key, value) -> {
