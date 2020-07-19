@@ -27,6 +27,19 @@ public class CustomInventory implements InventoryHolder {
     private String displayName;
     private Map<Integer, MenuItem> items = new HashMap<>();
 
+
+    /**
+     * Creates a CustomInventory off of arguments
+     * @param inventory
+     */
+    public CustomInventory(Inventory inventory) {
+        this.slots = inventory.getSize();
+        this.displayName = inventory.getName();
+        this.holder = inventory.getHolder();
+
+        this.inventory = inventory;
+    }
+
     /**
      * Creates a CustomInventory off of arguments
      *
