@@ -38,6 +38,7 @@ public class CustomInventory implements InventoryHolder {
         this.holder = inventory.getHolder();
 
         this.inventory = inventory;
+
     }
 
     /**
@@ -52,6 +53,16 @@ public class CustomInventory implements InventoryHolder {
         this.holder = holder == null ? this : holder;
 
         inventory = Bukkit.createInventory(this, slots, ChatColor.translateAlternateColorCodes('&', displayName));
+    }
+
+    /**
+     * Creates a CustomInventory off of arguments
+     *
+     * @param type
+     * @param displayName
+     */
+    public CustomInventory(InventoryType type,  String displayName) {
+        this(null, type, displayName);
     }
 
     public CustomInventory(InventoryHolder holder, InventoryType type, String displayName) {
