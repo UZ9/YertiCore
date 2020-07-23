@@ -10,9 +10,11 @@ public class CommandInfo {
     private String permission;
     private String permissionMessage;
     private String usage;
+    private String name;
 
     @SuppressWarnings("unchecked") //Aliases will always be a string list
-    public CommandInfo(Map<String, Object> info) {
+    public CommandInfo(String name, Map<String, Object> info) {
+        this.name = name;
         this.description = (String) info.get("description");
         this.aliases = (List<String>) info.get("aliases");
         this.permission = (String) info.get("permission");

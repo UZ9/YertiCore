@@ -10,7 +10,7 @@ public class CommandHandler {
     public static Map<String, CommandInfo> getCommands(Plugin plugin) {
         Map<String, CommandInfo> infoMap = new HashMap<>();
 
-        plugin.getDescription().getCommands().forEach((key, value) -> infoMap.put(key, new CommandInfo(value)));
+        plugin.getDescription().getCommands().forEach((key, value) -> infoMap.put(key, new CommandInfo(key, value)));
 
         return infoMap;
     }
