@@ -5,8 +5,6 @@ import com.yerti.core.command.CommandFramework;
 import com.yerti.core.enchantmenets.EnchantmentHandler;
 import com.yerti.core.entity.ModelProtection;
 import com.yerti.core.inventories.InventoryHandler;
-import com.yerti.core.localization.Localization;
-import com.yerti.core.localization.LocalizationType;
 import com.yerti.core.recipe.CustomRecipeHandler;
 import com.yerti.core.utils.ChatUtils;
 import org.bukkit.plugin.Plugin;
@@ -19,8 +17,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 public abstract class YertiPlugin extends JavaPlugin {
 
     private static Plugin hookedPlugin;
-
-    protected Class<?> commandClass;
 
     public static Plugin getHookedPlugin() {
         return hookedPlugin;
@@ -36,10 +32,10 @@ public abstract class YertiPlugin extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new EnchantmentHandler(), this);
         getServer().getPluginManager().registerEvents(new InventoryHandler(), this);
         onPluginEnable();
-        new CommandFramework(this, commandClass);
+    }
 
-        Localization localization = new Localization(this, LocalizationType.EN_US);
-        localization.getValue("pickaxe.name");
+    public void registerCommandClass(Class<?> clazz) {
+        new CommandFramework(this, clazz);
     }
 
     public final void onDisable() {

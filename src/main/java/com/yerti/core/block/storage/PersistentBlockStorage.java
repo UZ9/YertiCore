@@ -12,6 +12,24 @@ import java.util.logging.Level;
 public abstract class PersistentBlockStorage {
     private Map<Location, Map<String, Serializable>> data = new HashMap<>();
 
+    /**
+     * is equivalent to:
+     * <p><blockquote><pre>
+     *     char data[] = {'a', 'b', 'c'};
+     *     String str = new String(data);
+     * </pre></blockquote><p>
+     * Here are some more examples of how strings can be used:
+     * <p><blockquote><pre>
+     *     System.out.println("abc");
+     *     String cde = "cde";
+     *     System.out.println("abc" + cde);
+     *     String c = "abc".substring(2,3);
+     *     String d = cde.substring(1, 2);
+     * </pre></blockquote>
+     * @param location
+     * @param key
+     * @param value
+     */
     public void storeValue(Location location, String key, Serializable value) {
         if (!data.containsKey(location)) data.put(location, new HashMap<>());
 

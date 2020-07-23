@@ -20,9 +20,9 @@ public class CommandFramework implements CommandExecutor {
     private final YertiPlugin plugin;
     private Map<BukkitCommand, Object> commands = new HashMap<>();
     private CommandMap map;
-    private Class commandClass;
+    private Class<?> commandClass;
 
-    public CommandFramework(YertiPlugin plugin, Class commandClass) {
+    public CommandFramework(YertiPlugin plugin, Class<?> commandClass) {
         this.plugin = plugin;
         map = getCommandMap();
         this.commandClass = commandClass;
