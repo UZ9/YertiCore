@@ -22,6 +22,10 @@ public class CommandInfo {
         this.usage = (String) info.get("usage");
     }
 
+    public String getName() {
+        return name;
+    }
+
     public String getDescription() {
         return description;
     }
