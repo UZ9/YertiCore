@@ -10,4 +10,8 @@ public class Logger {
         YertiPlugin.getHookedPlugin().getLogger().log(level, text);
     }
 
+    public static void debug(Class<?> clazz, String text) {
+        YertiPlugin.getHookedPlugin().getLogger().log(Level.INFO, String.format("[%s] %s", clazz.getName(), text));
+    }
+
 }
