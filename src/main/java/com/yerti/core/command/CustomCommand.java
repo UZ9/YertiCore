@@ -34,7 +34,7 @@ public @interface CustomCommand {
      *
      * @return
      */
-    String permission();
+    String permission() default "";
 
     /**
      * OPTIONAL
