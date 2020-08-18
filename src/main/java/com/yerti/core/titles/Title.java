@@ -23,10 +23,10 @@ public class Title {
     /* Chat serializer */
     private static Class<?> nmsChatSerializer;
     private static Class<?> chatBaseComponent;
-    /* Title text and color */
+    /* Title text and extensions.color */
     private String title = "";
     private ChatColor titleColor = ChatColor.WHITE;
-    /* Subtitle text and color */
+    /* Subtitle text and extensions.color */
     private String subtitle = "";
     private ChatColor subtitleColor = ChatColor.WHITE;
     /* Title timings */
@@ -442,9 +442,9 @@ public class Title {
     }
 
     /**
-     * Set the title color
+     * Set the title extensions.color
      *
-     * @param color Chat color
+     * @param color Chat extensions.color
      */
     public void setTitleColor(ChatColor color) {
         this.titleColor = color;
@@ -455,9 +455,9 @@ public class Title {
     }
 
     /**
-     * Set the subtitle color
+     * Set the subtitle extensions.color
      *
-     * @param color Chat color
+     * @param color Chat extensions.color
      */
     public void setSubtitleColor(ChatColor color) {
         this.subtitleColor = color;

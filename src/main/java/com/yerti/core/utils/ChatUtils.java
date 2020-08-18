@@ -15,7 +15,7 @@ public class ChatUtils {
     }
 
     /**
-     * Adds chat color to a message. Will use prefix if set correctly.
+     * Adds chat extensions.color to a message. Will use prefix if set correctly.
      * @param message The message to be styled
      * @return The styled message
      */
@@ -24,7 +24,7 @@ public class ChatUtils {
     }
 
     /**
-     * Adds chat color to a message automatically (to remove unnecessary code clutter)
+     * Adds chat extensions.color to a message automatically (to remove unnecessary code clutter)
      * @param message The message to be styled
      * @return The styled message
      */
