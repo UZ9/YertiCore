@@ -1,6 +1,8 @@
 package events
 
 import com.yerti.core.YertiPlugin
+import extensions.colorPrefix
+import org.bukkit.entity.Player
 import org.bukkit.event.*
 import org.bukkit.plugin.RegisteredListener
 import java.util.*

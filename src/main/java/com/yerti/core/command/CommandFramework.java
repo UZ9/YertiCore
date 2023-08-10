@@ -35,7 +35,6 @@ public class CommandFramework implements CommandExecutor {
     public void registerCommands() {
         final Map<String, BukkitCommand> commandMap = new HashMap<>();
 
-        //for (Method method : clazz.getMethods()) {
         for (Method method : commandClass.getMethods()) {
             Object object = null;
             String name = commandClass.getName();
@@ -51,7 +50,6 @@ public class CommandFramework implements CommandExecutor {
             if (!method.isAnnotationPresent(CustomCommand.class)) {
                 continue;
             }
-
 
             Class<?>[] parameterType = method.getParameterTypes();
 
